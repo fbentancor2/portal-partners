@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">PARNER INF</title>
+  
+  <!-- Blindaje de Seguridad y Anti-Scraping / Anti-Bots -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow, nosnippet">
+  <meta name="bingbot" content="noindex, nofollow">
+
+  <!-- Fuente Bodoni de alta definición (Carga gratuita) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Identidad Visual Definitiva: Dark Mode Tecnológico / Neón Esmeralda */
+      --bg-ambient-light: #2b394e;
+      --bg-ambient-mid: #1a2536;
+      --bg-ambient-base: #090e17;
+      
+      --bg-card: #111a2e;
+      --bg-card-inner: #080e18;
+      --bg-input: #0c1424;
+      
+      --border-card: #1e2d4a;
+      --border-input: #1e2d4a;
+      
+      --accent: #10b981;
+      --accent-hover: #059669;
+      --accent-glow: rgba(16, 185, 129, 0.25);
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-matte-white: #f1f5f9;
+      --stroke-matte-white: #e2e8f0;
+      
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --whatsapp-green: #25d366;
+      
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-ambient-base);
+      background-image: 
+        radial-gradient(ellipse 90% 60% at 50% -10%, var(--bg-ambient-light) 0%, var(--bg-ambient-mid) 60%, var(--bg-ambient-base) 100%),
+        radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+      background-attachment: fixed;
+      background-size: cover;
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      padding: 28px 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { width: 100%; max-width: 1100px; }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 14px 35px -8px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    .brand-bodoni {
+      font-family: 'Bodoni Moda', 'Bodoni MT', Didot, 'Didot LT STD', Garamond, 'Times New Roman', serif;
+      font-style: italic;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--accent);
+      -webkit-text-stroke: 0.85px var(--stroke-matte-white);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      letter-spacing: 0.04em;
+      display: inline-block;
+    }
+
+    h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+    h1 { color: var(--accent); font-size: 1.8rem; display: flex; align-items: center; gap: 12px; }
+    h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border-card); padding-bottom: 10px; }
+
+    .app-logo { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+
+    .banner-desc {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(16, 185, 129, 0.06);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
+    }
+    .banner-desc p { color: #e2e8f0; font-size: 0.92rem; line-height: 1.5; margin: 0; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    @media (max-width: 650px) {
+      .form-row { grid-template-columns: 1fr; }
+      .banner-desc { flex-direction: column; align-items: flex-start; }
+    }
+
+    label { display: block; margin-bottom: 6px; color: #e2e8f0; font-size: 0.85rem; font-weight: 500; }
+    input, select, textarea {
+      width: 100%; padding: 12px 14px; background-color: var(--bg-input);
+      border: 1px solid var(--border-input); border-radius: 8px;
+      color: var(--text-main); font-size: 0.95rem; outline: none; transition: all 0.2s ease-in-out;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25); background-color: #0b1320;
+    }
+    input::placeholder { color: #718096; }
+
+    .error-alert {
+      background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;
+      font-size: 0.88rem; font-weight: 600; display: none;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      font-weight: 700; padding: 9px 16px; border-radius: 8px; cursor: pointer; border: none;
+      transition: all 0.2s ease; font-size: 0.88rem; letter-spacing: 0.02em; text-decoration: none; white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary {
+      background-color: var(--accent); color: var(--text-matte-white);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+    }
+    .btn-primary:hover { background-color: var(--accent-hover); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5); color: #ffffff; }
+    .btn-outline { background-color: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-card); color: #f1f5f9; font-weight: 600; }
+    .btn-outline:hover { background-color: rgba(255, 255, 255, 0.12); border-color: #4a5d7c; }
+    .btn-success { background-color: #059669; color: #ffffff; border: 1px solid #10b981; }
+    .btn-success:hover { background-color: #10b981; }
+    .btn-danger { background-color: var(--danger); color: white; font-weight: 700; }
+    .btn-danger:hover { background-color: var(--danger-hover); }
+    .btn-wa { background-color: rgba(37, 211, 102, 0.15); border: 1px solid rgba(37, 211, 102, 0.5); color: #25d366; }
+    .btn-wa:hover { background-color: #25d366; color: #042f22; }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+
+    .hp-shield { opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1; overflow: hidden; }
+
+    .table-container { overflow-x: auto; margin-top: 16px; border-radius: 8px; border: 1px solid var(--border-card); }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem; }
+    th, td { padding: 12px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+    th { background-color: var(--bg-card-inner); color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.04em; }
+    tbody tr:hover { background-color: rgba(255, 255, 255, 0.03); }
+
+    .code-chip {
+      font-family: monospace; font-size: 0.82rem; background: rgba(16, 185, 129, 0.12);
+      color: var(--accent); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(16, 185, 129, 0.3);
+      font-weight: 700; letter-spacing: 0.05em;
+    }
+    .op-chip {
+      font-family: monospace; font-size: 0.8rem; background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa; padding: 3px 7px; border-radius: 4px; border: 1px solid rgba(59, 130, 246, 0.3);
+      font-weight: 700;
+    }
+    .status-badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; }
+    .status-pending { background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.4); }
+    .status-paid { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .status-delivered { background: rgba(16, 185, 129, 0.15); color: var(--accent); border: 1px solid rgba(16, 185, 129, 0.4); }
+
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
+    .badge-admin { background: rgba(16, 185, 129, 0.15); color: var(--accent); border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-subadmin { background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.4); }
+
+    .kpi-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 20px; }
+    .kpi-card { background-color: var(--bg-card-inner); border: 1px solid var(--border-card); border-radius: 10px; padding: 16px; text-align: center; }
+    .kpi-value { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-top: 4px; }
+
+    .success-hero { text-align: center; padding: 10px 6px; }
+    .congrats-badge-header {
+      display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35); color: var(--accent); padding: 6px 16px;
+      border-radius: 9999px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px; text-transform: uppercase;
+    }
+    .code-display-box {
+      background: linear-gradient(180deg, #0d1524 0%, #060b14 100%);
+      border: 2px solid var(--accent); border-radius: 16px; padding: 26px 20px; margin: 22px auto; max-width: 520px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.2); position: relative; overflow: hidden;
+    }
+    .code-display-box::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .congrats-stars { color: #fbbf24; font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 6px; }
+    .code-display-title { font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+    .code-display-value {
+      font-family: "Courier New", Courier, monospace; font-size: 2.6rem; font-weight: 800;
+      color: #10b981; letter-spacing: 0.14em; margin: 12px 0; text-shadow: 0 0 16px rgba(16, 185, 129, 0.4); user-select: all;
+    }
+    .congrats-perks {
+      display: flex; justify-content: center; gap: 16px; margin-top: 14px; padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.8rem; color: #cbd5e1; flex-wrap: wrap;
+    }
+    .congrats-perks span { display: inline-flex; align-items: center; gap: 4px; }
+
+    .tab-nav { display: flex; gap: 8px; margin-bottom: 18px; border-bottom: 1px solid var(--border-card); padding-bottom: 10px; overflow-x: auto; }
+    .tab-btn {
+      background: transparent; border: none; color: var(--text-muted); padding: 8px 16px;
+      cursor: pointer; font-weight: 600; border-radius: 6px; font-size: 0.875rem; transition: all 0.2s; white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-main); }
+    .tab-btn.active { background-color: rgba(255, 255, 255, 0.09); color: var(--accent); }
+
+    .hidden { display: none !important; }
+    .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  </style>
+</head>
+<body data-nosnippet>
+  <div class="container">
+
+    <!-- Header Principal -->
+    <div class="card flex-between">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <svg class="app-logo" width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="10" fill="#111a2e" stroke="#10b981" stroke-width="1.5"/>
+          <path d="M20 7L31 15V27L20 34L9 27V15L20 7Z" stroke="#10b981" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="20" cy="20.5" r="4.5" fill="#10b981"/>
+          <path d="M20 11V16M28 24.5L24 22M12 24.5L16 22" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <h1 style="margin: 0;">
+            <span class="brand-bodoni" style="font-size: 1.85rem;">PARNER INF</span>
+          </h1>
+          <p id="brand-header-subtitle" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 2px;">Gestión y Registro Oficial de Red</p>
+        </div>
+      </div>
+      <div id="nav-actions"></div>
+    </div>
+
+    <!-- VISTA 1: REGISTRO PARTNER (PÚBLICA) -->
+    <div id="view-partner" class="card">
+      <h2 id="partner-form-title">Sumate como Partner Oficial</h2>
+      
+      <div class="banner-desc">
+        <svg class="app-logo" width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="#0d1524" stroke="#10b981" stroke-width="1.5"/>
+          <path d="M20 7L31 15V27L20 34L9 27V15L20 7Z" stroke="#10b981" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="20" cy="20.5" r="4.5" fill="#10b981"/>
+        </svg>
+        <p id="partner-form-desc">
+          Completa tus Datos de contacto para Obtener una ingreso extra sin esfuerzo,para ello entra a nuestro canal Exclusivo de <span class="brand-bodoni" style="font-size: 1.05rem;">PARNER INF</span> de WhatsApp despues que te registras
+        </p>
+      </div>
+
+      <div id="register-error-alert" class="error-alert"></div>
+
+      <form id="form-partner-register">
+        <div class="hp-shield">
+          <label for="company_website_token">Dejá este campo vacío</label>
+          <input type="text" id="company_website_token" name="company_website_token" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-name">Nombre y Apellido</label>
+            <input type="text" id="reg-name" required placeholder="Ej: Juan Pérez">
+          </div>
+
+          <div class="form-group">
+            <label for="reg-cuit">CUIT / CUIL (Único por Partner)</label>
+            <input type="text" id="reg-cuit" required placeholder="Ej: 20-12345678-9 (sin puntos)" maxlength="13">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-phone">WhatsApp / Teléfono (con código de área)</label>
+            <input type="tel" id="reg-phone" required placeholder="Ej: 5491112345678">
+          </div>
+
+          <div class="form-group">
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" required placeholder="tuemail@ejemplo.com">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-zone">Zona</label>
+            <input type="text" id="reg-zone" placeholder="Ej: Caballito / CABA">
+          </div>
+
+          <div class="form-group">
+            <label for="reg-instagram">Instagram</label>
+            <input type="text" id="reg-instagram" placeholder="Ej: @tu_usuario">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="btn-submit-register" style="width: 100%; margin-top: 8px;">
+          <span>Unirme a</span> <span class="brand-bodoni" style="font-size: 1.05rem; margin-left: 4px;">PARNER INF</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- VISTA 2: PANTALLA DE FELICITACIONES CON RECUADRO DESTACADO -->
+    <div id="view-success" class="card hidden">
+      <div class="success-hero">
+        <div class="congrats-badge-header">✦ ¡Registro Exitoso y Confirmado! ✦</div>
+        <h2 style="border: none; padding: 0; font-size: 1.7rem; color: #f8fafc;">
+          ¡Muchas Felicitaciones, <span id="success-partner-name" style="color: var(--accent);">Partner</span>!
+        </h2>
+        <p style="color: #cbd5e1; font-size: 0.95rem; max-width: 620px; margin: 8px auto 0;">
+          Ya estás oficialmente dado de alta en la red comercial de <span class="brand-bodoni" style="font-size: 1.05rem;">PARNER INF</span>. Tu identificador único para ventas y comisiones ya fue asignado.
+        </p>
+
+        <div class="code-display-box">
+          <div class="congrats-stars">★ ★ ★ ★ ★</div>
+          <div class="code-display-title">Tu Código Único de Cupón & Partner</div>
+          <div class="code-display-value" id="success-partner-code">ABC-000</div>
+          <p style="font-size: 0.82rem; color: #94a3b8; margin: 4px 0 0;">
+            Formato: <strong>3 Letras - 3 Números</strong> (Único e Irrepetible).
+          </p>
+
+          <div class="congrats-perks">
+            <span>✔ Comisión asignada</span>
+            <span>✔ Tracking automático</span>
+            <span>✔ Sin vencimiento</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 440px; margin: 0 auto;">
+          <a id="btn-success-whatsapp" href="#" target="_blank" class="btn btn-primary" style="font-size: 0.98rem; padding: 14px 20px;">
+            Ingresar al Canal Exclusivo de WhatsApp
+          </a>
+
+          <button type="button" class="btn btn-outline" id="btn-copy-code" onclick="app.copySuccessCode()">
+            Copiar Mi Código al Portapapeles
+          </button>
+
+          <button type="button" class="btn btn-outline" style="border-color: transparent; color: var(--text-muted); font-size: 0.85rem;" onclick="app.showView('view-partner')">
+            ← Volver al Formulario de Registro
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 3: ACCESO ADMINISTRATIVO -->
+    <div id="view-login" class="card hidden">
+      <h2>Acceso Administrativo</h2>
+      <form id="form-login">
+        <div class="form-group">
+          <label for="login-user">Usuario</label>
+          <input type="text" id="login-user" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="login-pass">Contraseña</label>
+          <input type="password" id="login-pass" required autocomplete="current-password">
+        </div>
+
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+          <button type="button" class="btn btn-outline" onclick="app.showView('view-partner')">Volver</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- VISTA 4: PANEL DE CONTROL ADMINISTRADOR -->
+    <div id="view-admin" class="card hidden">
+      <div class="flex-between" style="margin-bottom: 16px;">
+        <h2>Panel de Control - <span class="brand-bodoni" style="font-size: 1.3rem;">PARNER INF</span></h2>
+        <span id="session-badge" class="badge badge-admin">Sesión: Admin Maestro</span>
+      </div>
+
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="app.switchTab('tab-contacts', this)">Agenda de Partners</button>
+        <button class="tab-btn" onclick="app.switchTab('tab-sales', this)">Operaciones, Pagos & Entregas</button>
+        <button class="tab-btn" onclick="app.switchTab('tab-admins', this)">Administradores</button>
+        <button class="tab-btn" onclick="app.switchTab('tab-config', this)">Parámetros del Sistema</button>
+      </div>
+
+      <!-- Solapa 1: Agenda de Partners -->
+      <div id="tab-contacts">
+        <div class="btn-group" style="margin-bottom: 16px;">
+          <button type="button" class="btn btn-info" id="btn-sync-cloud" onclick="app.fetchRemotePartners(true)">
+            🔄 Actualizar / Traer Registros de la Nube
+          </button>
+          <button type="button" class="btn btn-success" onclick="app.exportToExcel()">
+            Descargar en Excel (.xlsx)
+          </button>
+          <button type="button" class="btn btn-primary" onclick="app.exportMassiveVCard()">
+            Descargar VCF Masivo (Agenda Móvil/Google)
+          </button>
+          <button type="button" class="btn btn-outline" onclick="app.copyAllEmails()">
+            Copiar Todos los Emails
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Código (3L-3N)</th>
+                <th>Nombre</th>
+                <th>CUIT / CUIL</th>
+                <th>WhatsApp</th>
+                <th>Email</th>
+                <th>Zona</th>
+                <th>Instagram</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="table-partners-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Solapa 2: Operaciones -->
+      <div id="tab-sales" class="hidden">
+        <div class="kpi-container">
+          <div class="kpi-card">
+            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Total Pagado / En Proceso</span>
+            <div class="kpi-value" id="kpi-total-sales">$0</div>
+          </div>
+          <div class="kpi-card">
+            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Pedidos Entregados</span>
+            <div class="kpi-value" id="kpi-delivered-count" style="color: var(--accent);">0</div>
+          </div>
+          <div class="kpi-card">
+            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Comisiones Liquidadas</span>
+            <div class="kpi-value" id="kpi-total-commissions" style="color: var(--warning);">$0</div>
+          </div>
+        </div>
+
+        <div style="background-color: var(--bg-card-inner); border: 1px solid var(--border-card); border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+          <h3>Cargar Pedido por Código de Cupón (3L-3N)</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px;">
+            Al ingresar el código del cupón del partner (ej. <code>ABC-123</code>), el sistema genera el número correlativo de operación, asocia al titular y te permite controlar el pago y marcar la entrega.
+          </p>
+
+          <form id="form-register-sale">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sale-coupon">Código del Cupón / Partner</label>
+                <input type="text" id="sale-coupon" required placeholder="Ej: ABC-123" style="text-transform: uppercase;">
+              </div>
+              <div class="form-group">
+                <label for="sale-amount">Monto del Pedido ($)</label>
+                <input type="number" step="0.01" id="sale-amount" required placeholder="Ej: 180000">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sale-commission-rate">% Comisión Partner</label>
+                <input type="number" id="sale-commission-rate" value="10" min="0" max="100">
+              </div>
+              <div class="form-group">
+                <label for="sale-initial-status">Estado Inicial</label>
+                <select id="sale-initial-status">
+                  <option value="paid">Pagado (Confirmado)</option>
+                  <option value="pending">Pendiente de Pago</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <button type="submit" class="btn btn-primary">Registrar Operación</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="btn-group" style="margin-bottom: 16px;">
+          <button type="button" class="btn btn-success" onclick="app.exportSalesToExcel()">
+            Descargar Pedidos en Excel (.xlsx)
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>N° Operación</th>
+                <th>Código Cupón</th>
+                <th>Partner</th>
+                <th>Monto</th>
+                <th>Comisión</th>
+                <th>Estado Pago</th>
+                <th>Procesamiento</th>
+                <th>Fecha</th>
+                <th>Acciones & Contacto</th>
+              </tr>
+            </thead>
+            <tbody id="table-sales-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Solapa 3: Administradores -->
+      <div id="tab-admins" class="hidden">
+        <h3>Crear Administrador Secundario</h3>
+        <form id="form-subadmin" style="margin-bottom: 20px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+            <div class="form-group">
+              <label for="sub-user">Usuario</label>
+              <input type="text" id="sub-user" required placeholder="Ej: operador1">
+            </div>
+            <div class="form-group">
+              <label for="sub-pass">Contraseña</label>
+              <input type="password" id="sub-pass" required placeholder="••••••••">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Crear Acceso</button>
+        </form>
+
+        <h3>Usuarios Administrativos Activos</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Nivel</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="table-admins-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Solapa 4: Configuración Multi-Tienda -->
+      <div id="tab-config" class="hidden">
+        <h3>Adaptación del Sistema & Webhooks</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px;">
+          Configuración flexible para clonar o reutilizar el sistema en cualquier otro proyecto.
+        </p>
+
+        <form id="form-store-settings">
+          <div class="form-group">
+            <label for="cfg-store-name">Nombre de la Aplicación / Tienda</label>
+            <input type="text" id="cfg-store-name">
+          </div>
+          <div class="form-group">
+            <label for="cfg-store-sub">Bajada o Subtítulo</label>
+            <input type="text" id="cfg-store-sub">
+          </div>
+          <div class="form-group">
+            <label for="cfg-wa-link">Enlace Oficial de WhatsApp (Canal o Directo)</label>
+            <input type="url" id="cfg-wa-link">
+          </div>
+          <div class="form-group">
+            <label for="cfg-sheet-url">URL de Apps Script (Google Sheets Webhook + Base de Datos Central)</label>
+            <input type="url" id="cfg-sheet-url">
+          </div>
+          <div class="form-group">
+            <label for="cfg-vcard-prefix">Prefijo para la Agenda VCF</label>
+            <input type="text" id="cfg-vcard-prefix" placeholder="Ej: Partner">
+          </div>
+
+          <div class="btn-group">
+            <button type="submit" class="btn btn-primary">Guardar Configuración</button>
+            <button type="button" class="btn btn-outline" onclick="app.resetStoreSettings()">Restablecer Valores</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    /**
+     * PARNER INF - NÚCLEO JS MAESTRO
+     * Llave Maestra Fija Directa: fbd / 120182
+     * Entorno Oficial: https://partnerif.netlify.app/
+     */
+    const MASTER_AUTH = {
+      user: "fbd",
+      pass: "120182"
+    };
+
+    // URL VINCULADA DE GOOGLE APPS SCRIPT
+    const DEFAULT_STORE_CONFIG = {
+      storeName: "PARNER INF",
+      storeSubtitle: "Gestión y Registro Oficial de Red",
+      formTitle: "Sumate como Partner Oficial",
+      whatsappUrl: "https://whatsapp.com/channel/0029VbE15jVJJhzRswWWVr3q",
+      sheetWebhook: "https://script.google.com/macros/s/AKfycbzSObB8fZVfv1m3idKKPqwOHMLxJ7rjGJ6USe2iqffbfKvSe6bRf7xBlaNiteCafxoI/exec",
+      vcardPrefix: "Partner"
+    };
+
+    const app = {
+      state: {
+        currentSession: null,
+        partners: [],
+        sales: [],
+        subAdmins: [],
+        store: { ...DEFAULT_STORE_CONFIG },
+        lastRegisteredCode: ""
+      },
+
+      init() {
+        this.loadStorage();
+        this.applyStoreConfig();
+        this.bindEvents();
+        this.renderNav();
+        if (this.state.store.sheetWebhook) {
+          this.fetchRemotePartners(false);
+        }
+      },
+
+      loadStorage() {
+        const storedPartners = localStorage.getItem("pi_partners");
+        this.state.partners = storedPartners ? JSON.parse(storedPartners) : [];
+
+        const storedSales = localStorage.getItem("pi_sales");
+        this.state.sales = storedSales ? JSON.parse(storedSales) : [];
+
+        const storedAdmins = localStorage.getItem("pi_subadmins");
+        this.state.subAdmins = storedAdmins ? JSON.parse(storedAdmins) : [];
+
+        const storedConfig = localStorage.getItem("pi_store_config");
+        if (storedConfig) {
+          this.state.store = Object.assign({}, DEFAULT_STORE_CONFIG, JSON.parse(storedConfig));
+          if (!this.state.store.sheetWebhook) {
+            this.state.store.sheetWebhook = DEFAULT_STORE_CONFIG.sheetWebhook;
+          }
+        }
+      },
+
+      saveStorage() {
+        localStorage.setItem("pi_partners", JSON.stringify(this.state.partners));
+        localStorage.setItem("pi_sales", JSON.stringify(this.state.sales));
+        localStorage.setItem("pi_subadmins", JSON.stringify(this.state.subAdmins));
+        localStorage.setItem("pi_store_config", JSON.stringify(this.state.store));
+      },
+
+      applyStoreConfig() {
+        document.getElementById("page-title").textContent = this.state.store.storeName;
+        document.getElementById("brand-header-subtitle").textContent = this.state.store.storeSubtitle;
+        document.getElementById("partner-form-title").textContent = this.state.store.formTitle;
+
+        document.getElementById("cfg-store-name").value = this.state.store.storeName;
+        document.getElementById("cfg-store-sub").value = this.state.store.storeSubtitle;
+        document.getElementById("cfg-wa-link").value = this.state.store.whatsappUrl;
+        document.getElementById("cfg-sheet-url").value = this.state.store.sheetWebhook;
+        document.getElementById("cfg-vcard-prefix").value = this.state.store.vcardPrefix;
+      },
+
+      showView(viewId) {
+        ["view-partner", "view-success", "view-login", "view-admin"].forEach(id => {
+          document.getElementById(id).classList.add("hidden");
+        });
+        document.getElementById(viewId).classList.remove("hidden");
+        this.renderNav();
+      },
+
+      switchTab(tabId, btn) {
+        ["tab-contacts", "tab-sales", "tab-admins", "tab-config"].forEach(id => {
+          document.getElementById(id).classList.add("hidden");
+        });
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.getElementById(tabId).classList.remove("hidden");
+        btn.classList.add("active");
+
+        if (tabId === "tab-sales") {
+          this.renderSalesTable();
+        }
+      },
+
+      renderNav() {
+        const nav = document.getElementById("nav-actions");
+        if (this.state.currentSession) {
+          nav.innerHTML = `<button class="btn btn-outline" onclick="app.logout()">Cerrar Sesión</button>`;
+        } else {
+          nav.innerHTML = `<button class="btn btn-outline" onclick="app.showView('view-login')">Panel Admin</button>`;
+        }
+      },
+
+      async sha256(str) {
+        const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+      },
+
+      cleanCuit(cuit) {
+        return (cuit || "").replace(/[^0-9]/g, "");
+      },
+
+      formatCuit(cuit) {
+        const clean = this.cleanCuit(cuit);
+        if (clean.length === 11) {
+          return `${clean.substring(0, 2)}-${clean.substring(2, 10)}-${clean.substring(10, 11)}`;
+        }
+        return cuit;
+      },
+
+      generatePartnerCode() {
+        const letters = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+        const numbers = "0123456789";
+        const existingCodes = new Set(this.state.partners.map(p => (p.id || "").toUpperCase()));
+
+        let uniqueCode = "";
+        let attempts = 0;
+
+        do {
+          let partLetters = "";
+          for (let i = 0; i < 3; i++) {
+            partLetters += letters.charAt(Math.floor(Math.random() * letters.length));
+          }
+
+          let partNumbers = "";
+          for (let i = 0; i < 3; i++) {
+            partNumbers += numbers.charAt(Math.floor(Math.random() * numbers.length));
+          }
+
+          uniqueCode = `${partLetters}-${partNumbers}`;
+          attempts++;
+
+          if (attempts > 5000) {
+            uniqueCode += Math.floor(Math.random() * 10);
+            break;
+          }
+        } while (existingCodes.has(uniqueCode));
+
+        return uniqueCode;
+      },
+
+      generateOperationNumber() {
+        const count = this.state.sales.length + 1;
+        return `OP-${String(count).padStart(5, '0')}`;
+      },
+
+      async login(user, pass) {
+        const cleanUser = user.trim();
+        const cleanPass = pass.trim();
+
+        if (cleanUser === MASTER_AUTH.user && cleanPass === MASTER_AUTH.pass) {
+          this.state.currentSession = "master";
+          this.enterAdminPanel("Sesión: Administrador Maestro", "badge-admin");
+          return true;
+        }
+
+        const hashedPass = await this.sha256(cleanPass);
+        const sub = this.state.subAdmins.find(a => a.user.toLowerCase() === cleanUser.toLowerCase() && a.passHash === hashedPass);
+
+        if (sub) {
+          this.state.currentSession = sub.user;
+          this.enterAdminPanel(`Sesión: ${sub.user} (Secundario)`, "badge-subadmin");
+          return true;
+        }
+
+        return false;
+      },
+
+      enterAdminPanel(badgeText, badgeClass) {
+        const badge = document.getElementById("session-badge");
+        badge.textContent = badgeText;
+        badge.className = `badge ${badgeClass}`;
+        this.showView("view-admin");
+        this.renderPartnersTable();
+        this.renderSalesTable();
+        this.renderAdminsTable();
+        
+        if (this.state.store.sheetWebhook) {
+          this.fetchRemotePartners(false);
+        }
+      },
+
+      logout() {
+        this.state.currentSession = null;
+        this.showView("view-partner");
+      },
+
+      // ========================================================
+      // SINCRONIZACIÓN CON SEGUIMIENTO DE REDIRECCIÓN (CORS / HTTP 302)
+      // ========================================================
+      async fetchRemotePartners(showAlert) {
+        if (!this.state.store.sheetWebhook) {
+          if (showAlert) alert("Primero debés configurar la URL de tu Google Apps Script en 'Parámetros del Sistema'.");
+          return;
+        }
+
+        const syncBtn = document.getElementById("btn-sync-cloud");
+        if (syncBtn && showAlert) {
+          syncBtn.textContent = "⏳ Conectando...";
+          syncBtn.disabled = true;
+        }
+
+        try {
+          const res = await fetch(this.state.store.sheetWebhook, {
+            method: "GET",
+            redirect: "follow",
+            headers: { "Accept": "application/json" }
+          });
+
+          if (!res.ok) {
+            throw new Error(`HTTP Error: ${res.status}`);
+          }
+
+          const rawText = await res.text();
+          let data;
+          try {
+            data = JSON.parse(rawText);
+          } catch(e) {
+            throw new Error("Respuesta no válida de Google Sheets");
+          }
+
+          if (data && data.partners && Array.isArray(data.partners)) {
+            let addedCount = 0;
+            data.partners.forEach(remoteP => {
+              const alreadyExists = this.state.partners.some(
+                p => p.id === remoteP.id || this.cleanCuit(p.cuit) === this.cleanCuit(remoteP.cuit)
+              );
+              if (!alreadyExists && remoteP.id) {
+                this.state.partners.push({
+                  id: remoteP.id,
+                  name: remoteP.name,
+                  cuit: this.formatCuit(remoteP.cuit),
+                  phone: remoteP.phone,
+                  email: remoteP.email,
+                  zone: remoteP.zone,
+                  instagram: remoteP.instagram,
+                  date: remoteP.date || new Date().toISOString()
+                });
+                addedCount++;
+              }
+            });
+
+            this.saveStorage();
+            this.renderPartnersTable();
+            if (showAlert) {
+              alert(`Sincronización completada. Se incorporaron ${addedCount} nuevos registros.`);
+            }
+          } else {
+            if (showAlert) alert("Conexión exitosa. No hay registros pendientes para importar.");
+          }
+        } catch (err) {
+          console.error("Error sincronizando:", err);
+          if (showAlert) {
+            alert("Error al conectar con Google Sheets. Verificá que la implementación en Apps Script tenga acceso asignado a 'Cualquiera'.");
+          }
+        } finally {
+          if (syncBtn && showAlert) {
+            syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
+            syncBtn.disabled = false;
+          }
+        }
+      },
+
+      async registerPartner(data) {
+        const errorAlert = document.getElementById("register-error-alert");
+        errorAlert.style.display = "none";
+        errorAlert.textContent = "";
+
+        if (data.hp && data.hp.trim() !== "") {
+          console.warn("Intento de bot neutralizado silenciosamente.");
+          return;
+        }
+
+        const cleanCuitNum = this.cleanCuit(data.cuit);
+
+        if (cleanCuitNum.length < 10 || cleanCuitNum.length > 11) {
+          errorAlert.textContent = "El CUIT/CUIL debe contener 11 dígitos numéricos.";
+          errorAlert.style.display = "block";
+          return;
+        }
+
+        const exists = this.state.partners.some(p => this.cleanCuit(p.cuit) === cleanCuitNum);
+        if (exists) {
+          errorAlert.textContent = "⚠️ Este CUIT/CUIL ya se encuentra registrado en el sistema. Solo se permite un registro de Partner por CUIT/CUIL.";
+          errorAlert.style.display = "block";
+          return;
+        }
+
+        let cleanIg = data.instagram.trim();
+        if (cleanIg && !cleanIg.startsWith("@")) {
+          cleanIg = "@" + cleanIg;
+        }
+
+        const generatedCode = this.generatePartnerCode();
+
+        const newPartner = {
+          id: generatedCode,
+          name: data.name.trim(),
+          cuit: this.formatCuit(cleanCuitNum),
+          phone: data.phone.replace(/[^0-9]/g, ""),
+          email: data.email.trim(),
+          zone: data.zone.trim() || "No especificada",
+          instagram: cleanIg || "No especificado",
+          date: new Date().toISOString()
+        };
+
+        this.state.partners.push(newPartner);
+        this.state.lastRegisteredCode = newPartner.id;
+        this.saveStorage();
+
+        // Enviar a Google Sheets
+        if (this.state.store.sheetWebhook) {
+          try {
+            fetch(this.state.store.sheetWebhook, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                action: "new_partner",
+                store: this.state.store.storeName,
+                ...newPartner
+              })
+            });
+          } catch(err) {
+            console.error("Error al enviar a Google Sheets:", err);
+          }
+        }
+
+        this.displaySuccessView(newPartner);
+      },
+
+      displaySuccessView(partner) {
+        document.getElementById("success-partner-name").textContent = partner.name;
+        document.getElementById("success-partner-code").textContent = partner.id;
+        document.getElementById("btn-success-whatsapp").href = this.state.store.whatsappUrl;
+        document.getElementById("form-partner-register").reset();
+        this.showView("view-success");
+      },
+
+      copySuccessCode() {
+        const code = this.state.lastRegisteredCode || document.getElementById("success-partner-code").textContent;
+        const btn = document.getElementById("btn-copy-code");
+        
+        navigator.clipboard.writeText(code).then(() => {
+          if (btn) {
+            const originalText = btn.textContent;
+            btn.textContent = "✔ ¡Código Copiado!";
+            btn.style.borderColor = "var(--accent)";
+            btn.style.color = "var(--accent)";
+            setTimeout(() => {
+              btn.textContent = originalText;
+              btn.style.borderColor = "";
+              btn.style.color = "";
+            }, 2000);
+          } else {
+            alert(`Código ${code} copiado al portapapeles.`);
+          }
+        }).catch(() => {
+          prompt("Copiá tu código:", code);
+        });
+      },
+
+      recordSale(couponCode, amount, commissionRate, initialStatus) {
+        const cleanCode = couponCode.trim().toUpperCase();
+        const partner = this.state.partners.find(p => p.id.toUpperCase() === cleanCode);
+
+        const parsedAmount = parseFloat(amount);
+        const parsedRate = parseFloat(commissionRate) || 0;
+        const commissionAmount = (parsedAmount * parsedRate) / 100;
+
+        const newSale = {
+          operationNumber: this.generateOperationNumber(),
+          couponCode: cleanCode,
+          partnerId: partner ? partner.id : cleanCode,
+          partnerName: partner ? partner.name : "Cupón no asignado / Externo",
+          partnerEmail: partner ? partner.email : "Sin email registrado",
+          partnerPhone: partner ? partner.phone : "",
+          amount: parsedAmount,
+          commissionRate: parsedRate,
+          commissionAmount: commissionAmount,
+          status: initialStatus || "paid",
+          processed: false,
+          date: new Date().toISOString(),
+          deliveryDate: null
+        };
+
+        this.state.sales.unshift(newSale);
+        this.saveStorage();
+        this.renderSalesTable();
+
+        alert(`Operación ${newSale.operationNumber} registrada con éxito.`);
+      },
+
+      toggleSaleProcessed(opNum) {
+        const sale = this.state.sales.find(s => s.operationNumber === opNum);
+        if (!sale) return;
+
+        sale.processed = !sale.processed;
+        this.saveStorage();
+        this.renderSalesTable();
+      },
+
+      updateSaleStatus(opNum, newStatus) {
+        const sale = this.state.sales.find(s => s.operationNumber === opNum);
+        if (!sale) return;
+
+        sale.status = newStatus;
+        if (newStatus === "delivered") {
+          sale.deliveryDate = new Date().toISOString();
+        }
+
+        this.saveStorage();
+        this.renderSalesTable();
+
+        if (newStatus === "delivered") {
+          this.notifyPartnerDelivered(sale);
+        }
+      },
+
+      sendWhatsAppToPartner(opNum) {
+        const sale = this.state.sales.find(s => s.operationNumber === opNum);
+        if (!sale) return;
+
+        let phone = sale.partnerPhone;
+        if (!phone) {
+          const partner = this.state.partners.find(p => p.id.toUpperCase() === sale.couponCode.toUpperCase());
+          if (partner && partner.phone) phone = partner.phone;
+        }
+
+        if (!phone) {
+          alert(`No hay número de WhatsApp registrado para el partner de la operación ${sale.operationNumber}.`);
+          return;
+        }
+
+        const cleanPhone = phone.replace(/[^0-9]/g, "");
+        const estadoTxt = sale.status === "delivered" ? "ENTREGADO" : (sale.status === "paid" ? "PAGADO" : "PENDIENTE DE PAGO");
+        const procesadoTxt = sale.processed ? "PROCESADO" : "EN PREPARACIÓN";
+
+        const text = encodeURIComponent(
+          `¡Hola ${sale.partnerName}! 👋\n\n` +
+          `Te contactamos desde *${this.state.store.storeName}* por tu cupón *${sale.couponCode}*.\n\n` +
+          `📦 *Detalle de Operación:*\n` +
+          `• N° Operación: *${sale.operationNumber}*\n` +
+          `• Monto de Venta: *$${Number(sale.amount).toLocaleString("es-AR")}*\n` +
+          `• Tu Comisión: *$${Number(sale.commissionAmount).toLocaleString("es-AR")}*\n` +
+          `• Estado: *${estadoTxt}*\n` +
+          `• Estado Pedido: *${procesadoTxt}*\n\n` +
+          `¡Gracias por ser parte de nuestra red!`
+        );
+
+        window.open(`https://wa.me/${cleanPhone}?text=${text}`, "_blank");
+      },
+
+      notifyPartnerDelivered(sale) {
+        if (!sale.partnerEmail || sale.partnerEmail === "Sin email registrado") {
+          alert(`El pedido ${sale.operationNumber} fue marcado como ENTREGADO, pero el partner no tiene un correo válido asociado.`);
+          return;
+        }
+
+        if (this.state.store.sheetWebhook) {
+          fetch(this.state.store.sheetWebhook, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              action: "notify_delivery_email",
+              store: this.state.store.storeName,
+              recipient: sale.partnerEmail,
+              partnerName: sale.partnerName,
+              operationNumber: sale.operationNumber,
+              amount: sale.amount,
+              commission: sale.commissionAmount
+            })
+          }).catch(err => console.error("Error enviando email vía Sheets:", err));
+        }
+
+        const subject = encodeURIComponent(`¡Pedido Entregado! Comisión generada en ${this.state.store.storeName}`);
+        const body = encodeURIComponent(
+          `Hola ${sale.partnerName},\n\n` +
+          `Te informamos que el pedido asociado a tu cupón (${sale.couponCode}) ya fue ENTREGADO con éxito.\n\n` +
+          `Detalle de la Operación:\n` +
+          `- Número de Operación: ${sale.operationNumber}\n` +
+          `- Monto de la Venta: $${sale.amount.toLocaleString("es-AR")}\n` +
+          `- Tu Comisión Ganada: $${sale.commissionAmount.toLocaleString("es-AR")}\n\n` +
+          `¡Gracias por formar parte de nuestra red oficial!\n` +
+          `${this.state.store.storeName}`
+        );
+
+        const mailtoUrl = `mailto:${sale.partnerEmail}?subject=${subject}&body=${body}`;
+
+        const proceed = confirm(
+          `✅ Operación ${sale.operationNumber} marcada como ENTREGADA.\n\n` +
+          `¿Deseás abrir la notificación por correo para ${sale.partnerName} (${sale.partnerEmail})?`
+        );
+
+        if (proceed) {
+          window.location.href = mailtoUrl;
+        }
+      },
+
+      deleteSale(opNum) {
+        if (!confirm(`¿Eliminar la operación ${opNum}?`)) return;
+        this.state.sales = this.state.sales.filter(s => s.operationNumber !== opNum);
+        this.saveStorage();
+        this.renderSalesTable();
+      },
+
+      renderSalesTable() {
+        const tbody = document.getElementById("table-sales-body");
+        if (!tbody) return;
+
+        let totalAmount = 0;
+        let deliveredCount = 0;
+        let totalCommissions = 0;
+
+        this.state.sales.forEach(s => {
+          if (s.status === "paid" || s.status === "delivered") {
+            totalAmount += Number(s.amount) || 0;
+            totalCommissions += Number(s.commissionAmount) || 0;
+          }
+          if (s.status === "delivered") {
+            deliveredCount++;
+          }
+        });
+
+        document.getElementById("kpi-total-sales").textContent = `$${totalAmount.toLocaleString("es-AR")}`;
+        document.getElementById("kpi-delivered-count").textContent = deliveredCount;
+        document.getElementById("kpi-total-commissions").textContent = `$${totalCommissions.toLocaleString("es-AR")}`;
+
+        if (this.state.sales.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 24px;">No hay pedidos registrados aún.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = this.state.sales.map(s => {
+          let statusBadge = "";
+          let paymentActionBtn = "";
+
+          if (s.status === "pending") {
+            statusBadge = `<span class="status-badge status-pending">Pendiente Pago</span>`;
+            paymentActionBtn = `
+              <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.updateSaleStatus('${s.operationNumber}', 'paid')">Marcar Pagado</button>
+            `;
+          } else if (s.status === "paid") {
+            statusBadge = `<span class="status-badge status-paid">Pagado</span>`;
+            paymentActionBtn = `
+              <button class="btn btn-success" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.updateSaleStatus('${s.operationNumber}', 'delivered')">✔ Marcar Entregado</button>
+            `;
+          } else if (s.status === "delivered") {
+            statusBadge = `<span class="status-badge status-delivered">Entregado</span>`;
+            paymentActionBtn = `
+              <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.notifyPartnerDelivered(app.state.sales.find(x => x.operationNumber === '${s.operationNumber}'))">📧 Mail</button>
+            `;
+          }
+
+          const processedBtn = s.processed
+            ? `<button class="btn btn-success" style="padding: 4px 10px; font-size: 0.72rem;" onclick="app.toggleSaleProcessed('${s.operationNumber}')">✔ Procesado</button>`
+            : `<button class="btn btn-danger" style="padding: 4px 10px; font-size: 0.72rem;" onclick="app.toggleSaleProcessed('${s.operationNumber}')">⛔ No Procesado</button>`;
+
+          return `
+            <tr>
+              <td><span class="op-chip">${this.escapeHtml(s.operationNumber)}</span></td>
+              <td><span class="code-chip">${this.escapeHtml(s.couponCode)}</span></td>
+              <td>
+                <div style="font-weight: 700;">${this.escapeHtml(s.partnerName)}</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">${this.escapeHtml(s.partnerEmail)}</div>
+              </td>
+              <td style="color: var(--accent); font-weight: 700;">$${Number(s.amount).toLocaleString("es-AR")}</td>
+              <td style="color: var(--warning); font-weight: 600;">$${Number(s.commissionAmount).toLocaleString("es-AR")}</td>
+              <td>${statusBadge}</td>
+              <td>${processedBtn}</td>
+              <td style="color: var(--text-muted); font-size: 0.78rem;">${s.date.replace("T", " ").substring(0, 16)}</td>
+              <td>
+                <div style="display: flex; gap: 4px; align-items: center; flex-wrap: nowrap;">
+                  <button class="btn btn-wa" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.sendWhatsAppToPartner('${s.operationNumber}')" title="Enviar WhatsApp al Partner">
+                    💬 WhatsApp
+                  </button>
+                  ${paymentActionBtn}
+                  <button class="btn btn-danger" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.deleteSale('${s.operationNumber}')">X</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      },
+
+      exportSalesToExcel() {
+        if (this.state.sales.length === 0) {
+          alert("No hay ventas registradas para exportar.");
+          return;
+        }
+
+        const headers = ["N° Operación", "Código Cupón", "Partner", "WhatsApp Partner", "Email Registrado", "Monto Pedido", "Comisión", "Estado Pago", "Procesado", "Fecha Alta", "Fecha Entrega"];
+        let csv = "\uFEFF";
+        csv += headers.map(h => `"${h}"`).join(";") + "\r\n";
+
+        this.state.sales.forEach(s => {
+          const row = [
+            `"${s.operationNumber}"`,
+            `"${s.couponCode}"`,
+            `"${(s.partnerName || "").replace(/"/g, '""')}"`,
+            `"${s.partnerPhone || ""}"`,
+            `"${(s.partnerEmail || "").replace(/"/g, '""')}"`,
+            `"${s.amount}"`,
+            `"${s.commissionAmount}"`,
+            `"${s.status === 'delivered' ? 'Entregado' : (s.status === 'paid' ? 'Pagado' : 'Pendiente')}"`,
+            `"${s.processed ? 'Procesado' : 'No Procesado'}"`,
+            `"${s.date.replace("T", " ").substring(0, 19)}"`,
+            `"${s.deliveryDate ? s.deliveryDate.replace("T", " ").substring(0, 19) : "-"}"`
+          ];
+          csv += row.join(";") + "\r\n";
+        });
+
+        const safeStoreName = this.state.store.storeName.replace(/\s+/g, "_");
+        this.downloadFile(`Pedidos_Entregas_${safeStoreName}_${new Date().toISOString().split("T")[0]}.csv`, csv, "text/csv;charset=utf-8;");
+      },
+
+      renderPartnersTable() {
+        const tbody = document.getElementById("table-partners-body");
+        if (!tbody) return;
+
+        if (this.state.partners.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 24px;">No hay partners registrados todavía. Hacé clic en "Actualizar / Traer Registros de la Nube" para sincronizar.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = this.state.partners.map(p => {
+          const igClean = p.instagram ? p.instagram.replace("@", "") : "";
+          const igLink = (p.instagram && p.instagram !== "No especificado") 
+            ? `<a href="https://instagram.com/${igClean}" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 500;">${this.escapeHtml(p.instagram)}</a>` 
+            : `<span style="color: var(--text-muted);">-</span>`;
+
+          return `
+            <tr>
+              <td><span class="code-chip">${this.escapeHtml(p.id)}</span></td>
+              <td><strong>${this.escapeHtml(p.name)}</strong></td>
+              <td style="font-family: monospace; color: #cbd5e1;">${this.escapeHtml(p.cuit || "-")}</td>
+              <td>
+                <a href="https://wa.me/${p.phone}" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 500;">
+                  +${this.escapeHtml(p.phone)}
+                </a>
+              </td>
+              <td>${this.escapeHtml(p.email)}</td>
+              <td>${this.escapeHtml(p.zone || "-")}</td>
+              <td>${igLink}</td>
+              <td style="color: var(--text-muted); font-size: 0.8rem;">${p.date.split("T")[0]}</td>
+              <td>
+                <div style="display: flex; gap: 6px;">
+                  <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.75rem;" onclick="app.exportSingleVCard('${p.id}')">VCF</button>
+                  <button class="btn btn-danger" style="padding: 4px 8px; font-size: 0.75rem;" onclick="app.deletePartner('${p.id}')">X</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      },
+
+      deletePartner(id) {
+        if (!confirm("¿Deseás eliminar este partner del listado local?")) return;
+        this.state.partners = this.state.partners.filter(p => p.id !== id);
+        this.saveStorage();
+        this.renderPartnersTable();
+      },
+
+      exportToExcel() {
+        if (this.state.partners.length === 0) {
+          alert("No hay registros cargados para exportar a Excel.");
+          return;
+        }
+
+        const headers = ["Código Único", "Nombre y Apellido", "CUIT / CUIL", "WhatsApp", "Email", "Zona", "Instagram", "Fecha de Alta"];
+        let csvContent = "\uFEFF";
+        csvContent += headers.map(h => `"${h}"`).join(";") + "\r\n";
+
+        this.state.partners.forEach(p => {
+          const row = [
+            `"${p.id || ""}"`,
+            `"${(p.name || "").replace(/"/g, '""')}"`,
+            `"${p.cuit || ""}"`,
+            `"${p.phone || ""}"`,
+            `"${(p.email || "").replace(/"/g, '""')}"`,
+            `"${(p.zone || "").replace(/"/g, '""')}"`,
+            `"${(p.instagram || "").replace(/"/g, '""')}"`,
+            `"${(p.date ? p.date.replace("T", " ").substring(0, 19) : "")}"`
+          ];
+          csvContent += row.join(";") + "\r\n";
+        });
+
+        const safeStoreName = this.state.store.storeName.replace(/\s+/g, "_");
+        const fileName = `Registros_${safeStoreName}_${new Date().toISOString().split("T")[0]}.csv`;
+        this.downloadFile(fileName, csvContent, "text/csv;charset=utf-8;");
+      },
+
+      async addSubAdmin(user, pass) {
+        const cleanUser = user.trim();
+        if (cleanUser.toLowerCase() === MASTER_AUTH.user.toLowerCase()) {
+          alert("El usuario 'fbd' es exclusivo del Administrador Maestro.");
+          return;
+        }
+        if (this.state.subAdmins.some(a => a.user.toLowerCase() === cleanUser.toLowerCase())) {
+          alert("Ya existe un administrador secundario con ese nombre.");
+          return;
+        }
+
+        const passHash = await this.sha256(pass.trim());
+        this.state.subAdmins.push({ user: cleanUser, passHash });
+        this.saveStorage();
+        this.renderAdminsTable();
+        alert(`Administrador secundario "${cleanUser}" creado.`);
+      },
+
+      deleteSubAdmin(user) {
+        if (!confirm(`¿Eliminar al administrador secundario "${user}"?`)) return;
+        this.state.subAdmins = this.state.subAdmins.filter(a => a.user !== user);
+        this.saveStorage();
+        this.renderAdminsTable();
+      },
+
+      renderAdminsTable() {
+        const tbody = document.getElementById("table-admins-body");
+        if (!tbody) return;
+
+        let rows = `
+          <tr>
+            <td><strong>${MASTER_AUTH.user}</strong></td>
+            <td><span class="badge badge-admin">Maestro (Inalterable)</span></td>
+            <td style="color: var(--text-muted); font-size: 0.8rem;">Protegido</td>
+          </tr>
+        `;
+
+        this.state.subAdmins.forEach(sub => {
+          rows += `
+            <tr>
+              <td><strong>${this.escapeHtml(sub.user)}</strong></td>
+              <td><span class="badge badge-subadmin">Secundario</span></td>
+              <td>
+                <button class="btn btn-danger" style="padding: 4px 8px; font-size: 0.75rem;" onclick="app.deleteSubAdmin('${this.escapeHtml(sub.user)}')">Eliminar</button>
+              </td>
+            </tr>
+          `;
+        });
+
+        tbody.innerHTML = rows;
+      },
+
+      generateVCardString(p) {
+        const prefix = this.state.store.vcardPrefix || "Partner";
+        return [
+          "BEGIN:VCARD",
+          "VERSION:3.0",
+          `FN:${prefix} - ${p.name} [${p.id}]`,
+          `N:${p.name};;;;`,
+          `TEL;TYPE=CELL:+${p.phone}`,
+          `EMAIL;TYPE=INTERNET:${p.email}`,
+          `NOTE:CUIT/CUIL: ${p.cuit || "N/A"} | Código: ${p.id} | Zona: ${p.zone} | Instagram: ${p.instagram || "N/A"} | Alta: ${p.date.split("T")[0]}`,
+          "END:VCARD"
+        ].join("\r\n");
+      },
+
+      exportSingleVCard(id) {
+        const p = this.state.partners.find(item => item.id === id);
+        if (!p) return;
+        const vcf = this.generateVCardString(p);
+        this.downloadFile(`${p.name.replace(/\s+/g, "_")}_${p.id}.vcf`, vcf, "text/vcard");
+      },
+
+      exportMassiveVCard() {
+        if (this.state.partners.length === 0) {
+          alert("No hay contactos para exportar.");
+          return;
+        }
+        let fullVcf = "";
+        this.state.partners.forEach(p => fullVcf += this.generateVCardString(p) + "\n");
+        const safeName = this.state.store.storeName.replace(/\s+/g, "_");
+        this.downloadFile(`Agenda_${safeName}.vcf`, fullVcf, "text/vcard");
+      },
+
+      copyAllEmails() {
+        if (this.state.partners.length === 0) {
+          alert("No hay correos registrados.");
+          return;
+        }
+        const emails = this.state.partners.map(p => p.email).join(", ");
+        navigator.clipboard.writeText(emails).then(() => {
+          alert("Emails copiados al portapapeles con éxito.");
+        }).catch(() => {
+          prompt("Copiá los emails manualmente:", emails);
+        });
+      },
+
+      resetStoreSettings() {
+        if (!confirm("¿Restablecer configuración predeterminada?")) return;
+        this.state.store = { ...DEFAULT_STORE_CONFIG };
+        this.saveStorage();
+        this.applyStoreConfig();
+        alert("Configuración restaurada.");
+      },
+
+      downloadFile(filename, text, mimeType) {
+        const blob = new Blob([text], { type: mimeType });
+        const element = document.createElement("a");
+        element.href = URL.createObjectURL(blob);
+        element.setAttribute("download", filename);
+        element.style.display = "none";
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+        URL.revokeObjectURL(element.href);
+      },
+
+      escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>"']/g, m => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        })[m]);
+      },
+
+      bindEvents() {
+        document.getElementById("form-login").addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const u = document.getElementById("login-user").value;
+          const p = document.getElementById("login-pass").value;
+          const ok = await this.login(u, p);
+          if (!ok) alert("Usuario o contraseña incorrectos.");
+        });
+
+        document.getElementById("form-partner-register").addEventListener("submit", (e) => {
+          e.preventDefault();
+          this.registerPartner({
+            name: document.getElementById("reg-name").value,
+            cuit: document.getElementById("reg-cuit").value,
+            phone: document.getElementById("reg-phone").value,
+            email: document.getElementById("reg-email").value,
+            zone: document.getElementById("reg-zone").value,
+            instagram: document.getElementById("reg-instagram").value,
+            hp: document.getElementById("company_website_token").value
+          });
+        });
+
+        document.getElementById("form-register-sale").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const coupon = document.getElementById("sale-coupon").value;
+          const amount = document.getElementById("sale-amount").value;
+          const rate = document.getElementById("sale-commission-rate").value;
+          const status = document.getElementById("sale-initial-status").value;
+          
+          this.recordSale(coupon, amount, rate, status);
+          document.getElementById("form-register-sale").reset();
+          document.getElementById("sale-commission-rate").value = "10";
+        });
+
+        document.getElementById("form-subadmin").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const u = document.getElementById("sub-user").value;
+          const p = document.getElementById("sub-pass").value;
+          this.addSubAdmin(u, p);
+          document.getElementById("form-subadmin").reset();
+        });
+
+        document.getElementById("form-store-settings").addEventListener("submit", (e) => {
+          e.preventDefault();
+          this.state.store.storeName = document.getElementById("cfg-store-name").value.trim() || DEFAULT_STORE_CONFIG.storeName;
+          this.state.store.storeSubtitle = document.getElementById("cfg-store-sub").value.trim() || DEFAULT_STORE_CONFIG.storeSubtitle;
+          this.state.store.whatsappUrl = document.getElementById("cfg-wa-link").value.trim() || DEFAULT_STORE_CONFIG.whatsappUrl;
+          this.state.store.sheetWebhook = document.getElementById("cfg-sheet-url").value.trim() || DEFAULT_STORE_CONFIG.sheetWebhook;
+          this.state.store.vcardPrefix = document.getElementById("cfg-vcard-prefix").value.trim() || "Partner";
+          
+          this.saveStorage();
+          this.applyStoreConfig();
+          alert("Configuración de PARNER INF guardada.");
+        });
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => app.init());
+  </script>
+</body>
+</html>
