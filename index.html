@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title id="page-title">PARNER INF</title>
   
   <!-- Blindaje de Seguridad y Anti-Scraping / Anti-Bots -->
@@ -45,7 +45,16 @@
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
 
     body {
       background-color: var(--bg-ambient-base);
@@ -57,7 +66,7 @@
       color: var(--text-main);
       font-family: var(--font-family);
       line-height: 1.5;
-      padding: 28px 16px;
+      padding: 16px 12px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -65,15 +74,24 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .container { width: 100%; max-width: 1100px; }
+    .container { 
+      width: 100%; 
+      max-width: 1100px; 
+    }
 
     .card {
       background-color: var(--bg-card);
       border: 1px solid var(--border-card);
       border-radius: 14px;
-      padding: 28px;
-      margin-bottom: 24px;
+      padding: 20px 16px;
+      margin-bottom: 20px;
       box-shadow: 0 14px 35px -8px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      body { padding: 28px 16px; }
+      .card { padding: 28px; margin-bottom: 24px; }
     }
 
     .brand-bodoni {
@@ -86,114 +104,182 @@
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
       letter-spacing: 0.04em;
       display: inline-block;
+      max-width: 100%;
+      word-break: break-word;
     }
 
-    h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
-    h1 { color: var(--accent); font-size: 1.8rem; display: flex; align-items: center; gap: 12px; }
-    h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border-card); padding-bottom: 10px; }
+    h1, h2, h3 { 
+      font-weight: 700; 
+      letter-spacing: -0.02em; 
+      margin-bottom: 14px; 
+      word-break: break-word;
+    }
+    
+    h1 { 
+      color: var(--accent); 
+      font-size: clamp(1.4rem, 5vw, 1.8rem); 
+      display: flex; 
+      align-items: center; 
+      gap: 10px; 
+      flex-wrap: wrap;
+    }
+    
+    h2 { 
+      font-size: clamp(1.15rem, 4vw, 1.35rem); 
+      border-bottom: 1px solid var(--border-card); 
+      padding-bottom: 10px; 
+    }
 
-    .app-logo { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+    .app-logo { 
+      display: inline-block; 
+      vertical-align: middle; 
+      flex-shrink: 0; 
+    }
 
-    /* Módulo Informativo / Explicación Partner */
+    /* Módulo Informativo / Explicación Partner Adaptable */
     .partner-info-box {
       background: linear-gradient(180deg, rgba(17, 26, 46, 0.95) 0%, rgba(8, 14, 24, 0.95) 100%);
       border: 1px solid rgba(16, 185, 129, 0.28);
-      border-radius: 14px;
-      padding: 24px 22px;
-      margin-bottom: 24px;
+      border-radius: 12px;
+      padding: 16px 14px;
+      margin-bottom: 22px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(16, 185, 129, 0.06);
       position: relative;
       overflow: hidden;
+      width: 100%;
     }
+
+    @media (min-width: 768px) {
+      .partner-info-box {
+        padding: 24px 22px;
+        border-radius: 14px;
+      }
+    }
+
     .partner-info-box::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; height: 3px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
+
     .partner-info-header {
       text-align: center;
       max-width: 760px;
-      margin: 0 auto 20px;
+      margin: 0 auto 16px;
     }
+
     .partner-info-pill {
       display: inline-block;
-      padding: 4px 12px;
+      padding: 4px 10px;
       background: rgba(16, 185, 129, 0.12);
       border: 1px solid rgba(16, 185, 129, 0.35);
       border-radius: 9999px;
       color: var(--accent);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       margin-bottom: 8px;
     }
+
     .partner-info-title {
-      font-size: 1.35rem;
+      font-size: clamp(1.1rem, 4vw, 1.35rem);
       color: #ffffff;
       margin-bottom: 8px;
       border: none;
       padding: 0;
+      line-height: 1.3;
     }
+
     .partner-info-text {
       color: #cbd5e1;
-      font-size: 0.94rem;
-      line-height: 1.6;
+      font-size: clamp(0.85rem, 3.5vw, 0.94rem);
+      line-height: 1.55;
+      text-align: left;
     }
+
+    @media (min-width: 600px) {
+      .partner-info-text { text-align: center; }
+    }
+
     .partner-steps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-      margin-top: 18px;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
     }
+
+    @media (min-width: 650px) {
+      .partner-steps-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 18px;
+      }
+    }
+
     .partner-step-card {
       background-color: var(--bg-card-inner);
       border: 1px solid var(--border-card);
       border-radius: 10px;
-      padding: 16px;
+      padding: 14px 12px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       transition: transform 0.2s ease, border-color 0.2s ease;
     }
+
     .partner-step-card:hover {
       border-color: rgba(16, 185, 129, 0.45);
       transform: translateY(-2px);
     }
+
     .step-number {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 800;
       color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
+
     .step-title {
       color: #ffffff;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 700;
     }
+
     .step-desc {
       color: var(--text-muted);
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       line-height: 1.45;
     }
 
-    .form-group { margin-bottom: 18px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 16px; width: 100%; }
+    .form-row { display: grid; grid-template-columns: 1fr; gap: 14px; }
 
-    @media (max-width: 650px) {
-      .form-row { grid-template-columns: 1fr; }
+    @media (min-width: 650px) {
+      .form-row { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .form-group { margin-bottom: 18px; }
     }
 
     label { display: block; margin-bottom: 6px; color: #e2e8f0; font-size: 0.85rem; font-weight: 500; }
+    
     input, select, textarea {
-      width: 100%; padding: 12px 14px; background-color: var(--bg-input);
-      border: 1px solid var(--border-input); border-radius: 8px;
-      color: var(--text-main); font-size: 0.95rem; outline: none; transition: all 0.2s ease-in-out;
+      width: 100%; 
+      padding: 12px 14px; 
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-input); 
+      border-radius: 8px;
+      color: var(--text-main); 
+      font-size: 0.95rem; 
+      outline: none; 
+      transition: all 0.2s ease-in-out;
     }
+
     input:focus, select:focus, textarea:focus {
-      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25); background-color: #0b1320;
+      border-color: var(--accent); 
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25); 
+      background-color: #0b1320;
     }
     input::placeholder { color: #718096; }
 
@@ -203,15 +289,35 @@
       font-size: 0.88rem; font-weight: 600; display: none;
     }
 
+    /* Botones Adaptables y Flexibles */
     .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-      font-weight: 700; padding: 9px 16px; border-radius: 8px; cursor: pointer; border: none;
-      transition: all 0.2s ease; font-size: 0.88rem; letter-spacing: 0.02em; text-decoration: none; white-space: nowrap;
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 6px;
+      font-weight: 700; 
+      padding: 12px 16px; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      border: none;
+      transition: all 0.2s ease; 
+      font-size: 0.9rem; 
+      letter-spacing: 0.02em; 
+      text-decoration: none; 
+      white-space: normal; /* Permite salto de línea en celulares pequeños */
+      text-align: center;
+      line-height: 1.35;
+      min-height: 44px; /* Tamaño táctil accesible */
+      word-break: break-word;
     }
+
     .btn:active { transform: scale(0.98); }
+    
     .btn-primary {
-      background-color: var(--accent); color: var(--text-matte-white);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+      background-color: var(--accent); 
+      color: var(--text-matte-white);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); 
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
     }
     .btn-primary:hover { background-color: var(--accent-hover); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5); color: #ffffff; }
     .btn-outline { background-color: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-card); color: #f1f5f9; font-weight: 600; }
@@ -224,13 +330,34 @@
     .btn-info:hover { background-color: #2563eb; }
     .btn-wa { background-color: rgba(37, 211, 102, 0.15); border: 1px solid rgba(37, 211, 102, 0.5); color: #25d366; }
     .btn-wa:hover { background-color: #25d366; color: #042f22; }
-    .btn-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    
+    .btn-group { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 10px; 
+      margin-top: 14px; 
+      width: 100%;
+    }
+
+    @media (min-width: 600px) {
+      .btn-group {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
 
     .hp-shield { opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1; overflow: hidden; }
 
-    .table-container { overflow-x: auto; margin-top: 16px; border-radius: 8px; border: 1px solid var(--border-card); }
-    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem; }
-    th, td { padding: 12px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+    .table-container { 
+      overflow-x: auto; 
+      margin-top: 16px; 
+      border-radius: 8px; 
+      border: 1px solid var(--border-card); 
+      width: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem; min-width: 700px; }
+    th, td { padding: 12px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
     th { background-color: var(--bg-card-inner); color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.04em; }
     tbody tr:hover { background-color: rgba(255, 255, 255, 0.03); }
 
@@ -253,64 +380,100 @@
     .badge-admin { background: rgba(16, 185, 129, 0.15); color: var(--accent); border: 1px solid rgba(16, 185, 129, 0.4); }
     .badge-subadmin { background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.4); }
 
-    .kpi-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 20px; }
+    .kpi-container { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
+    @media (min-width: 550px) {
+      .kpi-container { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+    }
     .kpi-card { background-color: var(--bg-card-inner); border: 1px solid var(--border-card); border-radius: 10px; padding: 16px; text-align: center; }
     .kpi-value { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-top: 4px; }
 
-    .success-hero { text-align: center; padding: 10px 6px; }
+    .success-hero { text-align: center; padding: 10px 4px; width: 100%; }
     .congrats-badge-header {
       display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.35); color: var(--accent); padding: 6px 16px;
-      border-radius: 9999px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px; text-transform: uppercase;
+      border: 1px solid rgba(16, 185, 129, 0.35); color: var(--accent); padding: 6px 14px;
+      border-radius: 9999px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px; text-transform: uppercase;
     }
     .code-display-box {
       background: linear-gradient(180deg, #0d1524 0%, #060b14 100%);
-      border: 2px solid var(--accent); border-radius: 16px; padding: 26px 20px; margin: 22px auto; max-width: 520px;
+      border: 2px solid var(--accent); border-radius: 14px; padding: 22px 14px; margin: 20px auto; max-width: 520px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.2); position: relative; overflow: hidden;
+      width: 100%;
     }
     .code-display-box::before {
       content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
     .congrats-stars { color: #fbbf24; font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 6px; }
-    .code-display-title { font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+    .code-display-title { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
     .code-display-value {
-      font-family: "Courier New", Courier, monospace; font-size: 2.6rem; font-weight: 800;
-      color: #10b981; letter-spacing: 0.14em; margin: 12px 0; text-shadow: 0 0 16px rgba(16, 185, 129, 0.4); user-select: all;
+      font-family: "Courier New", Courier, monospace; font-size: clamp(2rem, 8vw, 2.6rem); font-weight: 800;
+      color: #10b981; letter-spacing: 0.12em; margin: 10px 0; text-shadow: 0 0 16px rgba(16, 185, 129, 0.4); user-select: all;
     }
     .congrats-perks {
-      display: flex; justify-content: center; gap: 16px; margin-top: 14px; padding-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.8rem; color: #cbd5e1; flex-wrap: wrap;
+      display: flex; justify-content: center; gap: 12px; margin-top: 14px; padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.78rem; color: #cbd5e1; flex-wrap: wrap;
     }
     .congrats-perks span { display: inline-flex; align-items: center; gap: 4px; }
 
-    .tab-nav { display: flex; gap: 8px; margin-bottom: 18px; border-bottom: 1px solid var(--border-card); padding-bottom: 10px; overflow-x: auto; }
+    .tab-nav { 
+      display: flex; 
+      gap: 8px; 
+      margin-bottom: 18px; 
+      border-bottom: 1px solid var(--border-card); 
+      padding-bottom: 10px; 
+      overflow-x: auto; 
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+    }
     .tab-btn {
-      background: transparent; border: none; color: var(--text-muted); padding: 8px 16px;
-      cursor: pointer; font-weight: 600; border-radius: 6px; font-size: 0.875rem; transition: all 0.2s; white-space: nowrap;
+      background: transparent; border: none; color: var(--text-muted); padding: 8px 14px;
+      cursor: pointer; font-weight: 600; border-radius: 6px; font-size: 0.85rem; transition: all 0.2s; white-space: nowrap;
     }
     .tab-btn:hover { color: var(--text-main); }
     .tab-btn.active { background-color: rgba(255, 255, 255, 0.09); color: var(--accent); }
 
-    /* Barra de Búsqueda de Partners */
+    /* Barra de Búsqueda Adaptable */
     .search-bar-box {
       background-color: var(--bg-card-inner);
       border: 1px solid var(--border-card);
       border-radius: 10px;
-      padding: 14px 16px;
+      padding: 12px;
       margin-bottom: 16px;
       display: flex;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
     }
+
+    @media (min-width: 650px) {
+      .search-bar-box {
+        flex-direction: row;
+        align-items: center;
+        padding: 14px 16px;
+      }
+    }
+
     .search-bar-box input {
       flex: 1;
-      min-width: 220px;
+      width: 100%;
     }
 
     .hidden { display: none !important; }
-    .flex-between { display: flex; justify-content: space-between; align-items: center; }
+    
+    .flex-between { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 14px; 
+      align-items: flex-start; 
+    }
+
+    @media (min-width: 600px) {
+      .flex-between {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 <body data-nosnippet>
@@ -318,32 +481,32 @@
 
     <!-- Header Principal -->
     <div class="card flex-between">
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <svg class="app-logo" width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
+        <svg class="app-logo" width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="40" height="40" rx="10" fill="#111a2e" stroke="#10b981" stroke-width="1.5"/>
           <path d="M20 7L31 15V27L20 34L9 27V15L20 7Z" stroke="#10b981" stroke-width="2" stroke-linejoin="round"/>
           <circle cx="20" cy="20.5" r="4.5" fill="#10b981"/>
           <path d="M20 11V16M28 24.5L24 22M12 24.5L16 22" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <div>
+        <div style="flex: 1;">
           <h1 style="margin: 0;">
-            <span class="brand-bodoni" style="font-size: 1.85rem;" id="header-brand-name">PARNER INF</span>
+            <span class="brand-bodoni" id="header-brand-name">PARNER INF</span>
           </h1>
-          <p id="brand-header-subtitle" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 2px;">Gestión y Registro Oficial de Red</p>
+          <p id="brand-header-subtitle" style="color: var(--text-muted); font-size: 0.8rem; margin-top: 2px;">Gestión y Registro Oficial de Red</p>
         </div>
       </div>
-      <div id="nav-actions"></div>
+      <div id="nav-actions" style="width: 100%; display: flex; justify-content: flex-end;"></div>
     </div>
 
     <!-- VISTA 1: REGISTRO PARTNER + MÓDULO EXPLICATIVO -->
     <div id="view-partner" class="card">
       
-      <!-- HERO EXPLICATIVO: ¿QUÉ ES SER PARTNER? -->
+      <!-- HERO EXPLICATIVO -->
       <section class="partner-info-box">
         <div class="partner-info-header">
           <span class="partner-info-pill" id="ui-info-badge">Oportunidad & Colaboración</span>
           <h2 class="partner-info-title" id="ui-info-title">
-            ¿Qué significa ser parte del mundo <span class="brand-bodoni" style="font-size: 1.25rem;">PARNER INF</span>?
+            ¿Qué significa ser parte del mundo <span class="brand-bodoni" style="font-size: 1.15rem;">PARNER INF</span>?
           </h2>
           <p class="partner-info-text" id="ui-info-body">
             Ser Partner te ayuda a generar un ingreso extra sin complicaciones. Al registrarte en nuestro sistema, obtenés un código de cupón exclusivo (3 letras y 3 números) y acceso a nuestro canal privado con materiales digitales listos para compartir. Con tu código ofrecés descuentos a tus compradores y obtenés un porcentaje de cada venta que se concrete. Porque creemos que colaborando todos nos potenciamos: sumate hoy.
@@ -370,7 +533,7 @@
       </section>
 
       <!-- FORMULARIO DE ALTA -->
-      <h2 id="partner-form-title" style="margin-top: 10px;">Sumate como Partner Oficial</h2>
+      <h2 id="partner-form-title" style="margin-top: 6px;">Sumate como Partner Oficial</h2>
       
       <div id="register-error-alert" class="error-alert"></div>
 
@@ -416,8 +579,8 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" id="btn-submit-register" style="width: 100%; margin-top: 8px;">
-          <span>Unirme ahora como</span> <span class="brand-bodoni" style="font-size: 1.05rem; margin-left: 4px;">PARNER INF</span>
+        <button type="submit" class="btn btn-primary" id="btn-submit-register" style="width: 100%; margin-top: 10px;">
+          <span>Unirme ahora como</span> <span class="brand-bodoni" style="font-size: 1rem; margin-left: 4px;">PARNER INF</span>
         </button>
       </form>
     </div>
@@ -426,18 +589,18 @@
     <div id="view-success" class="card hidden">
       <div class="success-hero">
         <div class="congrats-badge-header">✦ ¡Registro Exitoso y Confirmado! ✦</div>
-        <h2 style="border: none; padding: 0; font-size: 1.7rem; color: #f8fafc;">
+        <h2 style="border: none; padding: 0; font-size: clamp(1.3rem, 5vw, 1.7rem); color: #f8fafc;">
           ¡Muchas Felicitaciones, <span id="success-partner-name" style="color: var(--accent);">Partner</span>!
         </h2>
-        <p style="color: #cbd5e1; font-size: 0.95rem; max-width: 620px; margin: 8px auto 0;">
-          Ya estás oficialmente dado de alta en la red comercial de <span class="brand-bodoni" style="font-size: 1.05rem;">PARNER INF</span>. Tu identificador único para ventas y comisiones ya fue asignado.
+        <p style="color: #cbd5e1; font-size: 0.92rem; max-width: 620px; margin: 8px auto 0;">
+          Ya estás oficialmente dado de alta en la red comercial de <span class="brand-bodoni" style="font-size: 1rem;">PARNER INF</span>. Tu identificador único para ventas y comisiones ya fue asignado.
         </p>
 
         <div class="code-display-box">
           <div class="congrats-stars">★ ★ ★ ★ ★</div>
           <div class="code-display-title">Tu Código Único de Cupón & Partner</div>
           <div class="code-display-value" id="success-partner-code">ABC-000</div>
-          <p style="font-size: 0.82rem; color: #94a3b8; margin: 4px 0 0;">
+          <p style="font-size: 0.8rem; color: #94a3b8; margin: 4px 0 0;">
             Formato: <strong>3 Letras - 3 Números</strong> (Único e Irrepetible).
           </p>
 
@@ -448,8 +611,8 @@
           </div>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 440px; margin: 0 auto;">
-          <a id="btn-success-whatsapp" href="#" target="_blank" class="btn btn-primary" style="font-size: 0.98rem; padding: 14px 20px;">
+        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 440px; margin: 0 auto; width: 100%;">
+          <a id="btn-success-whatsapp" href="#" target="_blank" class="btn btn-primary" style="font-size: 0.95rem; padding: 14px;">
             Ingresar al Canal Exclusivo de WhatsApp
           </a>
 
@@ -479,8 +642,8 @@
         </div>
 
         <div class="btn-group">
-          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-          <button type="button" class="btn btn-outline" onclick="app.showView('view-partner')">Volver</button>
+          <button type="submit" class="btn btn-primary" style="flex: 1;">Iniciar Sesión</button>
+          <button type="button" class="btn btn-outline" style="flex: 1;" onclick="app.showView('view-partner')">Volver</button>
         </div>
       </form>
     </div>
@@ -488,13 +651,13 @@
     <!-- VISTA 4: PANEL DE CONTROL ADMINISTRADOR -->
     <div id="view-admin" class="card hidden">
       <div class="flex-between" style="margin-bottom: 16px;">
-        <h2>Panel de Control - <span class="brand-bodoni" style="font-size: 1.3rem;">PARNER INF</span></h2>
+        <h2>Panel de Control - <span class="brand-bodoni" style="font-size: 1.2rem;">PARNER INF</span></h2>
         <span id="session-badge" class="badge badge-admin">Sesión: Administrador Maestro</span>
       </div>
 
       <div class="tab-nav">
         <button class="tab-btn active" onclick="app.switchTab('tab-contacts', this)">Agenda de Partners</button>
-        <button class="tab-btn" onclick="app.switchTab('tab-sales', this)">Operaciones, Pagos & Entregas</button>
+        <button class="tab-btn" onclick="app.switchTab('tab-sales', this)">Operaciones & Pedidos</button>
         <button class="tab-btn" onclick="app.switchTab('tab-admins', this)">Administradores</button>
         <button class="tab-btn" onclick="app.switchTab('tab-config', this)">Parámetros del Sistema</button>
       </div>
@@ -503,13 +666,13 @@
       <div id="tab-contacts">
         <div class="btn-group" style="margin-bottom: 16px;">
           <button type="button" class="btn btn-info" id="btn-sync-cloud" onclick="app.fetchRemotePartners(true)">
-            🔄 Actualizar / Traer Registros de la Nube
+            🔄 Actualizar / Traer de la Nube
           </button>
           <button type="button" class="btn btn-success" onclick="app.exportToExcel()">
             Descargar en Excel (.xlsx)
           </button>
           <button type="button" class="btn btn-primary" onclick="app.exportMassiveVCard()">
-            Descargar VCF Masivo (Agenda Móvil/Google)
+            Descargar VCF Masivo (Agenda Móvil)
           </button>
           <button type="button" class="btn btn-outline" onclick="app.copyAllEmails()">
             Copiar Todos los Emails
@@ -518,10 +681,12 @@
 
         <!-- Buscador Inteligente en Tiempo Real -->
         <div class="search-bar-box">
-          <span style="color: var(--accent); font-weight: 700; font-size: 0.9rem;">🔍 Buscar:</span>
-          <input type="text" id="partner-search-input" placeholder="Filtrar por Nombre, Apellido, CUIT, Email o Código..." oninput="app.filterPartners()">
-          <button type="button" class="btn btn-outline" style="padding: 8px 12px; font-size: 0.8rem;" onclick="app.clearPartnerSearch()">Limpiar Filtro</button>
-          <span id="search-counter" style="color: var(--text-muted); font-size: 0.8rem; margin-left: auto;"></span>
+          <span style="color: var(--accent); font-weight: 700; font-size: 0.88rem;">🔍 Buscar:</span>
+          <input type="text" id="partner-search-input" placeholder="Nombre, CUIT, Email o Código..." oninput="app.filterPartners()">
+          <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between;">
+            <button type="button" class="btn btn-outline" style="padding: 6px 10px; font-size: 0.78rem;" onclick="app.clearPartnerSearch()">Limpiar</button>
+            <span id="search-counter" style="color: var(--text-muted); font-size: 0.78rem;"></span>
+          </div>
         </div>
 
         <div class="table-container">
@@ -548,21 +713,21 @@
       <div id="tab-sales" class="hidden">
         <div class="kpi-container">
           <div class="kpi-card">
-            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Total Pagado / En Proceso</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Total Pagado / En Proceso</span>
             <div class="kpi-value" id="kpi-total-sales">$0</div>
           </div>
           <div class="kpi-card">
-            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Pedidos Entregados</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Pedidos Entregados</span>
             <div class="kpi-value" id="kpi-delivered-count" style="color: var(--accent);">0</div>
           </div>
           <div class="kpi-card">
-            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Comisiones Liquidadas</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Comisiones Liquidadas</span>
             <div class="kpi-value" id="kpi-total-commissions" style="color: var(--warning);">$0</div>
           </div>
         </div>
 
-        <div style="background-color: var(--bg-card-inner); border: 1px solid var(--border-card); border-radius: 10px; padding: 20px; margin-bottom: 20px;">
-          <h3>Cargar Pedido por Código de Cupón (3L-3N)</h3>
+        <div style="background-color: var(--bg-card-inner); border: 1px solid var(--border-card); border-radius: 10px; padding: 16px; margin-bottom: 20px;">
+          <h3>Cargar Pedido por Cupón (3L-3N)</h3>
           <form id="form-register-sale">
             <div class="form-row">
               <div class="form-group">
@@ -590,7 +755,7 @@
             </div>
 
             <div class="btn-group">
-              <button type="submit" class="btn btn-primary">Registrar Operación</button>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Registrar Operación</button>
             </div>
           </form>
         </div>
@@ -625,7 +790,7 @@
       <div id="tab-admins" class="hidden">
         <h3>Crear Administrador Secundario</h3>
         <form id="form-subadmin" style="margin-bottom: 20px;">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+          <div class="form-row">
             <div class="form-group">
               <label for="sub-user">Usuario</label>
               <input type="text" id="sub-user" required placeholder="Ej: operador1">
@@ -635,7 +800,7 @@
               <input type="password" id="sub-pass" required placeholder="••••••••">
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Crear Acceso</button>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Crear Acceso</button>
         </form>
 
         <h3>Usuarios Administrativos Activos</h3>
@@ -662,7 +827,7 @@
             <input type="text" id="cfg-store-name">
           </div>
           <div class="form-group">
-            <label for="cfg-store-sub">Bajada o Subtítulo del Encabezado</label>
+            <label for="cfg-store-sub">Bajada del Encabezado</label>
             <input type="text" id="cfg-store-sub">
           </div>
           <div class="form-group">
@@ -687,8 +852,8 @@
           </div>
 
           <div class="btn-group">
-            <button type="submit" class="btn btn-primary">Guardar Configuración</button>
-            <button type="button" class="btn btn-outline" onclick="app.resetStoreSettings()">Restablecer Valores</button>
+            <button type="submit" class="btn btn-primary" style="flex: 1;">Guardar Configuración</button>
+            <button type="button" class="btn btn-outline" style="flex: 1;" onclick="app.resetStoreSettings()">Restablecer Valores</button>
           </div>
         </form>
       </div>
@@ -698,9 +863,6 @@
   </div>
 
   <script>
-    /**
-     * CREDENCIALES MAESTRAS Y WEBHOOK OFICIAL
-     */
     const MASTER_AUTH = {
       user: "fbd",
       pass: "120182"
@@ -770,7 +932,6 @@
         document.getElementById("brand-header-subtitle").textContent = this.state.store.storeSubtitle;
         document.getElementById("partner-form-title").textContent = this.state.store.formTitle;
 
-        // Renderizado del módulo explicativo
         const titleEl = document.getElementById("ui-info-title");
         if (titleEl) {
           titleEl.textContent = this.state.store.infoTitle || DEFAULT_STORE_CONFIG.infoTitle;
@@ -780,7 +941,6 @@
           bodyEl.textContent = this.state.store.infoBody || DEFAULT_STORE_CONFIG.infoBody;
         }
 
-        // Carga en campos de configuración del panel
         document.getElementById("cfg-store-name").value = this.state.store.storeName;
         document.getElementById("cfg-store-sub").value = this.state.store.storeSubtitle;
         document.getElementById("cfg-info-title").value = this.state.store.infoTitle || DEFAULT_STORE_CONFIG.infoTitle;
@@ -816,9 +976,9 @@
       renderNav() {
         const nav = document.getElementById("nav-actions");
         if (this.state.currentSession) {
-          nav.innerHTML = `<button class="btn btn-outline" onclick="app.logout()">Cerrar Sesión</button>`;
+          nav.innerHTML = `<button class="btn btn-outline" style="width: 100%;" onclick="app.logout()">Cerrar Sesión</button>`;
         } else {
-          nav.innerHTML = `<button class="btn btn-outline" onclick="app.showView('view-login')">Panel Admin</button>`;
+          nav.innerHTML = `<button class="btn btn-outline" style="width: 100%;" onclick="app.showView('view-login')">Panel Admin</button>`;
         }
       },
 
@@ -921,7 +1081,6 @@
         this.showView("view-partner");
       },
 
-      // FILTRADO INTELIGENTE POR NOMBRE, CUIT, EMAIL Y CÓDIGO
       filterPartners() {
         const input = document.getElementById("partner-search-input");
         this.state.searchQuery = input ? input.value.trim().toLowerCase() : "";
@@ -935,7 +1094,6 @@
         this.renderPartnersTable();
       },
 
-      // SINCRONIZACIÓN UNIVERSAL SIN CORS
       fetchRemotePartners(showAlert) {
         const webhookUrl = this.state.store.sheetWebhook || OFFICIAL_WEBHOOK;
         const syncBtn = document.getElementById("btn-sync-cloud");
@@ -952,7 +1110,7 @@
           if (elem) elem.remove();
 
           if (syncBtn && showAlert) {
-            syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
+            syncBtn.textContent = "🔄 Actualizar / Traer de la Nube";
             syncBtn.disabled = false;
           }
 
@@ -1001,7 +1159,7 @@
           delete window[callbackName];
           script.remove();
           if (syncBtn && showAlert) {
-            syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
+            syncBtn.textContent = "🔄 Actualizar / Traer de la Nube";
             syncBtn.disabled = false;
           }
           if (showAlert) {
@@ -1267,7 +1425,7 @@
               <td>${processedBtn}</td>
               <td style="color: var(--text-muted); font-size: 0.78rem;">${this.formatDateSafe(s.date)}</td>
               <td>
-                <div style="display: flex; gap: 4px; align-items: center;">
+                <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
                   <button class="btn btn-wa" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.sendWhatsAppToPartner('${s.operationNumber}')">💬 WhatsApp</button>
                   ${paymentActionBtn}
                   <button class="btn btn-danger" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.deleteSale('${s.operationNumber}')">X</button>
@@ -1315,7 +1473,7 @@
         if (!tbody) return;
 
         if (!this.state.partners || this.state.partners.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 24px;">No hay partners registrados todavía. Hacé clic en "Actualizar / Traer Registros de la Nube" para sincronizar.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 24px;">No hay partners registrados todavía. Hacé clic en "Actualizar / Traer de la Nube" para sincronizar.</td></tr>`;
           if (counter) counter.textContent = "";
           return;
         }
@@ -1336,12 +1494,12 @@
 
         if (counter) {
           counter.textContent = query 
-            ? `Mostrando ${filtered.length} de ${this.state.partners.length} partners` 
-            : `Total: ${this.state.partners.length} partners`;
+            ? `${filtered.length} / ${this.state.partners.length}` 
+            : `Total: ${this.state.partners.length}`;
         }
 
         if (filtered.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 24px;">No se encontraron partners que coincidan con la búsqueda "${this.escapeHtml(this.state.searchQuery)}".</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 24px;">No se encontraron resultados para "${this.escapeHtml(this.state.searchQuery)}".</td></tr>`;
           return;
         }
 
