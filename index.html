@@ -216,6 +216,23 @@
     .tab-btn:hover { color: var(--text-main); }
     .tab-btn.active { background-color: rgba(255, 255, 255, 0.09); color: var(--accent); }
 
+    /* Estilo de la Barra de Búsqueda de Partners */
+    .search-bar-box {
+      background-color: var(--bg-card-inner);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .search-bar-box input {
+      flex: 1;
+      min-width: 220px;
+    }
+
     .hidden { display: none !important; }
     .flex-between { display: flex; justify-content: space-between; align-items: center; }
   </style>
@@ -399,6 +416,14 @@
           <button type="button" class="btn btn-outline" onclick="app.copyAllEmails()">
             Copiar Todos los Emails
           </button>
+        </div>
+
+        <!-- Buscador Inteligente en Tiempo Real -->
+        <div class="search-bar-box">
+          <span style="color: var(--accent); font-weight: 700; font-size: 0.9rem;">🔍 Buscar:</span>
+          <input type="text" id="partner-search-input" placeholder="Filtrar por Nombre, Apellido, CUIT, Email o Código..." oninput="app.filterPartners()">
+          <button type="button" class="btn btn-outline" style="padding: 8px 12px; font-size: 0.8rem;" onclick="app.clearPartnerSearch()">Limpiar Filtro</button>
+          <span id="search-counter" style="color: var(--text-muted); font-size: 0.8rem; margin-left: auto;"></span>
         </div>
 
         <div class="table-container">
@@ -593,7 +618,8 @@
         sales: [],
         subAdmins: [],
         store: { ...DEFAULT_STORE_CONFIG },
-        lastRegisteredCode: ""
+        lastRegisteredCode: "",
+        searchQuery: ""
       },
 
       init() {
@@ -660,6 +686,8 @@
 
         if (tabId === "tab-sales") {
           this.renderSalesTable();
+        } else if (tabId === "tab-contacts") {
+          this.renderPartnersTable();
         }
       },
 
@@ -771,7 +799,21 @@
         this.showView("view-partner");
       },
 
-      // SINCRONIZACIÓN UNIVERSAL SIN CORS Y CON PROTECCIÓN DE TIPOS
+      // FILTRADO INTELIGENTE POR NOMBRE, CUIT, EMAIL Y CÓDIGO
+      filterPartners() {
+        const input = document.getElementById("partner-search-input");
+        this.state.searchQuery = input ? input.value.trim().toLowerCase() : "";
+        this.renderPartnersTable();
+      },
+
+      clearPartnerSearch() {
+        const input = document.getElementById("partner-search-input");
+        if (input) input.value = "";
+        this.state.searchQuery = "";
+        this.renderPartnersTable();
+      },
+
+      // SINCRONIZACIÓN UNIVERSAL SIN CORS
       fetchRemotePartners(showAlert) {
         const webhookUrl = this.state.store.sheetWebhook || OFFICIAL_WEBHOOK;
         const syncBtn = document.getElementById("btn-sync-cloud");
@@ -1147,14 +1189,41 @@
 
       renderPartnersTable() {
         const tbody = document.getElementById("table-partners-body");
+        const counter = document.getElementById("search-counter");
         if (!tbody) return;
 
         if (!this.state.partners || this.state.partners.length === 0) {
           tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 24px;">No hay partners registrados todavía. Hacé clic en "Actualizar / Traer Registros de la Nube" para sincronizar.</td></tr>`;
+          if (counter) counter.textContent = "";
           return;
         }
 
-        tbody.innerHTML = this.state.partners.map(p => {
+        const query = (this.state.searchQuery || "").toLowerCase();
+        const cleanQueryCuit = query.replace(/[^0-9]/g, "");
+
+        const filtered = this.state.partners.filter(p => {
+          if (!query) return true;
+          const matchName = (p.name || "").toLowerCase().includes(query);
+          const matchEmail = (p.email || "").toLowerCase().includes(query);
+          const matchId = (p.id || "").toLowerCase().includes(query);
+          const matchCuitDirect = (p.cuit || "").toLowerCase().includes(query);
+          const matchCuitDigits = cleanQueryCuit && this.cleanCuit(p.cuit).includes(cleanQueryCuit);
+
+          return matchName || matchEmail || matchId || matchCuitDirect || matchCuitDigits;
+        });
+
+        if (counter) {
+          counter.textContent = query 
+            ? `Mostrando ${filtered.length} de ${this.state.partners.length} partners` 
+            : `Total: ${this.state.partners.length} partners`;
+        }
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 24px;">No se encontraron partners que coincidan con la búsqueda "${this.escapeHtml(this.state.searchQuery)}".</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(p => {
           const igVal = (p.instagram || "").toString().trim();
           const igClean = igVal.replace("@", "");
           const igLink = (igVal && igVal !== "No especificado" && igClean !== "") 
