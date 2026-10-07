@@ -10,7 +10,7 @@
   <meta name="googlebot" content="noindex, nofollow, nosnippet">
   <meta name="bingbot" content="noindex, nofollow">
 
-  <!-- Fuente Bodoni -->
+  <!-- Fuente Bodoni de alta definición -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,800&display=swap" rel="stylesheet">
@@ -374,7 +374,7 @@
     <div id="view-admin" class="card hidden">
       <div class="flex-between" style="margin-bottom: 16px;">
         <h2>Panel de Control - <span class="brand-bodoni" style="font-size: 1.3rem;">PARNER INF</span></h2>
-        <span id="session-badge" class="badge badge-admin">Sesión: Admin Maestro</span>
+        <span id="session-badge" class="badge badge-admin">Sesión: Administrador Maestro</span>
       </div>
 
       <div class="tab-nav">
@@ -568,7 +568,7 @@
 
   <script>
     /**
-     * CREDENCIALES MAESTRAS Y WEBHOOK OFICIAL DE APPS SCRIPT
+     * CREDENCIALES MAESTRAS Y WEBHOOK OFICIAL
      */
     const MASTER_AUTH = {
       user: "fbd",
@@ -598,14 +598,12 @@
 
       init() {
         this.loadStorage();
-        // Fuerza el Webhook oficial para evitar URLs obsoletas en localStorage
         this.state.store.sheetWebhook = OFFICIAL_WEBHOOK;
         this.saveStorage();
 
         this.applyStoreConfig();
         this.bindEvents();
         this.renderNav();
-        // Sincronización silenciosa inicial al cargar
         this.fetchRemotePartners(false);
       },
 
@@ -680,7 +678,7 @@
       },
 
       cleanCuit(cuit) {
-        return (cuit || "").replace(/[^0-9]/g, "");
+        return (cuit || "").toString().replace(/[^0-9]/g, "");
       },
 
       formatCuit(cuit) {
@@ -765,8 +763,8 @@
         this.showView("view-partner");
       },
 
-      // SINCRONIZACIÓN DIRECTA COMPATIBLE
-      async fetchRemotePartners(showAlert) {
+      // SINCRONIZACIÓN UNIVERSAL SIN CORS
+      fetchRemotePartners(showAlert) {
         const webhookUrl = this.state.store.sheetWebhook || OFFICIAL_WEBHOOK;
         const syncBtn = document.getElementById("btn-sync-cloud");
         if (syncBtn && showAlert) {
@@ -774,9 +772,17 @@
           syncBtn.disabled = true;
         }
 
-        try {
-          const response = await fetch(`${webhookUrl}?_t=${Date.now()}`);
-          const data = await response.json();
+        const callbackName = "partner_cb_" + Date.now();
+
+        window[callbackName] = (data) => {
+          delete window[callbackName];
+          const elem = document.getElementById(callbackName);
+          if (elem) elem.remove();
+
+          if (syncBtn && showAlert) {
+            syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
+            syncBtn.disabled = false;
+          }
 
           let added = 0;
           if (data && data.partners && Array.isArray(data.partners)) {
@@ -809,28 +815,31 @@
           this.saveStorage();
           this.renderPartnersTable();
 
-          if (syncBtn && showAlert) {
-            syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
-            syncBtn.disabled = false;
-          }
-
           if (showAlert) {
             alert(`¡Sincronización completada! Se incorporaron ${added} nuevos registros.`);
           }
-        } catch (err) {
-          console.error("Error en sincronización directa:", err);
+        };
+
+        const script = document.createElement("script");
+        script.id = callbackName;
+        const separator = webhookUrl.includes("?") ? "&" : "?";
+        script.src = `${webhookUrl}${separator}callback=${callbackName}&_t=${Date.now()}`;
+
+        script.onerror = () => {
+          delete window[callbackName];
+          script.remove();
           if (syncBtn && showAlert) {
             syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
             syncBtn.disabled = false;
           }
           if (showAlert) {
-            alert("No se pudo obtener la respuesta. Verificá la conexión con Google Sheets.");
+            alert("Error al conectar con Google Sheets.");
           }
-        }
-      },
+        };
+
+        document.body.appendChild(script);
       },
 
-      // REGISTRO DESDE EL FORMULARIO
       async registerPartner(data) {
         const errorAlert = document.getElementById("register-error-alert");
         errorAlert.style.display = "none";
@@ -847,7 +856,7 @@
 
         const exists = this.state.partners.some(p => this.cleanCuit(p.cuit) === cleanCuitNum);
         if (exists) {
-          errorAlert.textContent = "⚠ Este CUIT/CUIL ya se encuentra registrado en el sistema.";
+          errorAlert.textContent = "⚠️ Este CUIT/CUIL ya se encuentra registrado en el sistema.";
           errorAlert.style.display = "block";
           return;
         }
@@ -874,7 +883,6 @@
         this.state.lastRegisteredCode = newPartner.id;
         this.saveStorage();
 
-        // Enviar a Google Sheets
         const webhookUrl = this.state.store.sheetWebhook || OFFICIAL_WEBHOOK;
         try {
           fetch(webhookUrl, {
@@ -893,7 +901,7 @@
             }).toString()
           });
         } catch(err) {
-          console.error("Error al registrar:", err);
+          console.error("Error al registrar en nube:", err);
         }
 
         this.displaySuccessView(newPartner);
@@ -922,6 +930,8 @@
               btn.style.borderColor = "";
               btn.style.color = "";
             }, 2000);
+          } else {
+            alert(`Código ${code} copiado al portapapeles.`);
           }
         }).catch(() => {
           prompt("Copiá tu código:", code);
@@ -1199,7 +1209,8 @@
         });
 
         const safeStoreName = this.state.store.storeName.replace(/\s+/g, "_");
-        this.downloadFile(`Registros_${safeStoreName}_${new Date().toISOString().split("T")[0]}.csv`, csvContent, "text/csv;charset=utf-8;");
+        const fileName = `Registros_${safeStoreName}_${new Date().toISOString().split("T")[0]}.csv`;
+        this.downloadFile(fileName, csvContent, "text/csv;charset=utf-8;");
       },
 
       async addSubAdmin(user, pass) {
