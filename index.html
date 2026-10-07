@@ -10,7 +10,7 @@
   <meta name="googlebot" content="noindex, nofollow, nosnippet">
   <meta name="bingbot" content="noindex, nofollow">
 
-  <!-- Fuente Bodoni de alta definición -->
+  <!-- Fuente Bodoni -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,800&display=swap" rel="stylesheet">
@@ -41,7 +41,6 @@
       --danger-hover: #dc2626;
       --warning: #f59e0b;
       --info: #3b82f6;
-      --whatsapp-green: #25d366;
       
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
@@ -78,7 +77,7 @@
     }
 
     .brand-bodoni {
-      font-family: 'Bodoni Moda', 'Bodoni MT', Didot, 'Didot LT STD', Garamond, 'Times New Roman', serif;
+      font-family: 'Bodoni Moda', 'Bodoni MT', Didot, Garamond, serif;
       font-style: italic;
       font-weight: 800;
       text-transform: uppercase;
@@ -145,6 +144,8 @@
     .btn-success:hover { background-color: #10b981; }
     .btn-danger { background-color: var(--danger); color: white; font-weight: 700; }
     .btn-danger:hover { background-color: var(--danger-hover); }
+    .btn-info { background-color: var(--info); color: white; font-weight: 700; }
+    .btn-info:hover { background-color: #2563eb; }
     .btn-wa { background-color: rgba(37, 211, 102, 0.15); border: 1px solid rgba(37, 211, 102, 0.5); color: #25d366; }
     .btn-wa:hover { background-color: #25d366; color: #042f22; }
     .btn-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
@@ -567,7 +568,7 @@
 
   <script>
     /**
-     * CREDENCIALES MAESTRAS Y WEBHOOK OFICIAL
+     * CREDENCIALES MAESTRAS Y WEBHOOK OFICIAL DE APPS SCRIPT
      */
     const MASTER_AUTH = {
       user: "fbd",
@@ -597,14 +598,14 @@
 
       init() {
         this.loadStorage();
-        // Garantiza siempre el webhook oficial activo
-        if (!this.state.store.sheetWebhook || this.state.store.sheetWebhook !== OFFICIAL_WEBHOOK) {
-          this.state.store.sheetWebhook = OFFICIAL_WEBHOOK;
-          this.saveStorage();
-        }
+        // Fuerza el Webhook oficial para evitar URLs obsoletas en localStorage
+        this.state.store.sheetWebhook = OFFICIAL_WEBHOOK;
+        this.saveStorage();
+
         this.applyStoreConfig();
         this.bindEvents();
         this.renderNav();
+        // Sincronización silenciosa inicial al cargar
         this.fetchRemotePartners(false);
       },
 
@@ -764,7 +765,7 @@
         this.showView("view-partner");
       },
 
-      // SINCRONIZACIÓN BLINDADA POR JSONP
+      // SINCRONIZACIÓN DIRECTA (JSONP + FALLBACK FETCH)
       fetchRemotePartners(showAlert) {
         const webhookUrl = this.state.store.sheetWebhook || OFFICIAL_WEBHOOK;
         const syncBtn = document.getElementById("btn-sync-cloud");
@@ -773,96 +774,93 @@
           syncBtn.disabled = true;
         }
 
-        const callbackName = "cb_sync_" + Math.random().toString(36).substring(2, 9);
-        
-        const timeoutId = setTimeout(() => {
-          if (window[callbackName]) {
-            delete window[callbackName];
-            const oldScript = document.getElementById(callbackName);
-            if (oldScript) oldScript.remove();
-            if (syncBtn && showAlert) {
-              syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
-              syncBtn.disabled = false;
-            }
-            if (showAlert) alert("Tiempo de espera agotado. Verificá que la implementación en Apps Script tenga acceso asignado a 'Cualquiera'.");
-          }
-        }, 12000);
+        const callbackName = "cb_sync_" + Date.now();
+        let finished = false;
 
-        window[callbackName] = (data) => {
-          clearTimeout(timeoutId);
-          delete window[callbackName];
-          const oldScript = document.getElementById(callbackName);
-          if (oldScript) oldScript.remove();
+        const finalize = (addedCount, success, msg) => {
+          if (finished) return;
+          finished = true;
+          if (window[callbackName]) delete window[callbackName];
+          const elem = document.getElementById(callbackName);
+          if (elem) elem.remove();
 
           if (syncBtn && showAlert) {
             syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
             syncBtn.disabled = false;
           }
 
-          if (data && data.partners && Array.isArray(data.partners)) {
-            let addedCount = 0;
-            data.partners.forEach(remoteP => {
-              const alreadyExists = this.state.partners.some(
-                p => p.id === remoteP.id || (p.cuit && remoteP.cuit && this.cleanCuit(p.cuit) === this.cleanCuit(remoteP.cuit))
-              );
-              if (!alreadyExists && remoteP.id) {
-                this.state.partners.push({
-                  id: remoteP.id,
-                  name: remoteP.name,
-                  cuit: this.formatCuit(remoteP.cuit),
-                  phone: remoteP.phone,
-                  email: remoteP.email,
-                  zone: remoteP.zone,
-                  instagram: remoteP.instagram,
-                  date: remoteP.date || new Date().toISOString()
-                });
-                addedCount++;
-              }
-            });
-
+          if (success) {
             this.saveStorage();
             this.renderPartnersTable();
             if (showAlert) {
-              alert(`¡Sincronización exitosa! Se incorporaron ${addedCount} nuevos registros.`);
+              alert(`¡Sincronización completada! Se incorporaron ${addedCount} nuevos registros.`);
             }
+          } else if (showAlert && msg) {
+            alert(msg);
+          }
+        };
+
+        const timeoutId = setTimeout(() => {
+          finalize(0, false, "Tiempo de espera agotado al conectar con Google Sheets.");
+        }, 12000);
+
+        // Definición del Callback JSONP
+        window[callbackName] = (data) => {
+          clearTimeout(timeoutId);
+          if (data && data.partners && Array.isArray(data.partners)) {
+            let added = 0;
+            data.partners.forEach(remoteP => {
+              const cleanRemoteId = (remoteP.id || "").toString().trim().toUpperCase();
+              const cleanRemoteCuit = this.cleanCuit(remoteP.cuit);
+
+              const exists = this.state.partners.some(p => {
+                const sameId = (p.id || "").toString().trim().toUpperCase() === cleanRemoteId;
+                const sameCuit = cleanRemoteCuit && this.cleanCuit(p.cuit) === cleanRemoteCuit;
+                return sameId || sameCuit;
+              });
+
+              if (!exists && cleanRemoteId) {
+                this.state.partners.unshift({
+                  id: cleanRemoteId,
+                  name: remoteP.name || "Sin nombre",
+                  cuit: this.formatCuit(cleanRemoteCuit),
+                  phone: (remoteP.phone || "").toString().replace(/[^0-9]/g, ""),
+                  email: remoteP.email || "",
+                  zone: remoteP.zone || "No especificada",
+                  instagram: remoteP.instagram || "No especificado",
+                  date: remoteP.date || new Date().toISOString()
+                });
+                added++;
+              }
+            });
+            finalize(added, true);
           } else {
-            if (showAlert) alert("Conectado con éxito a Google Sheets. No hay filas pendientes para importar.");
+            finalize(0, true);
           }
         };
 
         const script = document.createElement("script");
         script.id = callbackName;
         const separator = webhookUrl.includes("?") ? "&" : "?";
-        script.src = `${webhookUrl}${separator}callback=${callbackName}`;
+        script.src = `${webhookUrl}${separator}callback=${callbackName}&_t=${Date.now()}`;
         
         script.onerror = () => {
           clearTimeout(timeoutId);
-          delete window[callbackName];
-          script.remove();
-          if (syncBtn && showAlert) {
-            syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
-            syncBtn.disabled = false;
-          }
-          if (showAlert) {
-            alert("No se pudo conectar con Google Sheets. Verificá que en Apps Script la implementación tenga acceso asignado a 'Cualquiera'.");
-          }
+          finalize(0, false, "Error de red al conectar con Google Apps Script.");
         };
 
         document.body.appendChild(script);
       },
 
-      // REGISTRO Y ENVÍO SEGURO
+      // REGISTRO DESDE EL FORMULARIO
       async registerPartner(data) {
         const errorAlert = document.getElementById("register-error-alert");
         errorAlert.style.display = "none";
         errorAlert.textContent = "";
 
-        if (data.hp && data.hp.trim() !== "") {
-          return;
-        }
+        if (data.hp && data.hp.trim() !== "") return;
 
         const cleanCuitNum = this.cleanCuit(data.cuit);
-
         if (cleanCuitNum.length < 10 || cleanCuitNum.length > 11) {
           errorAlert.textContent = "El CUIT/CUIL debe contener 11 dígitos numéricos.";
           errorAlert.style.display = "block";
@@ -871,7 +869,7 @@
 
         const exists = this.state.partners.some(p => this.cleanCuit(p.cuit) === cleanCuitNum);
         if (exists) {
-          errorAlert.textContent = "⚠️️ Este CUIT/CUIL ya se encuentra registrado en el sistema.";
+          errorAlert.textContent = "⚠ Este CUIT/CUIL ya se encuentra registrado en el sistema.";
           errorAlert.style.display = "block";
           return;
         }
@@ -894,11 +892,11 @@
           date: new Date().toISOString()
         };
 
-        this.state.partners.push(newPartner);
+        this.state.partners.unshift(newPartner);
         this.state.lastRegisteredCode = newPartner.id;
         this.saveStorage();
 
-        // Envío directo compatible con formulario URL-Encoded a Google Sheets
+        // Enviar a Google Sheets
         const webhookUrl = this.state.store.sheetWebhook || OFFICIAL_WEBHOOK;
         try {
           fetch(webhookUrl, {
@@ -917,7 +915,7 @@
             }).toString()
           });
         } catch(err) {
-          console.error("Error al enviar a la hoja:", err);
+          console.error("Error al registrar:", err);
         }
 
         this.displaySuccessView(newPartner);
@@ -946,8 +944,6 @@
               btn.style.borderColor = "";
               btn.style.color = "";
             }, 2000);
-          } else {
-            alert(`Código ${code} copiado al portapapeles.`);
           }
         }).catch(() => {
           prompt("Copiá tu código:", code);
@@ -1225,8 +1221,7 @@
         });
 
         const safeStoreName = this.state.store.storeName.replace(/\s+/g, "_");
-        const fileName = `Registros_${safeStoreName}_${new Date().toISOString().split("T")[0]}.csv`;
-        this.downloadFile(fileName, csvContent, "text/csv;charset=utf-8;");
+        this.downloadFile(`Registros_${safeStoreName}_${new Date().toISOString().split("T")[0]}.csv`, csvContent, "text/csv;charset=utf-8;");
       },
 
       async addSubAdmin(user, pass) {
