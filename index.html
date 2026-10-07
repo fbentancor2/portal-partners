@@ -686,7 +686,15 @@
         if (clean.length === 11) {
           return `${clean.substring(0, 2)}-${clean.substring(2, 10)}-${clean.substring(10, 11)}`;
         }
-        return cuit;
+        return cuit || "";
+      },
+
+      formatDateSafe(d) {
+        if (!d) return "-";
+        const str = d.toString();
+        if (str.includes("T")) return str.split("T")[0];
+        if (str.length >= 10) return str.substring(0, 10);
+        return str;
       },
 
       generatePartnerCode() {
@@ -763,7 +771,7 @@
         this.showView("view-partner");
       },
 
-      // SINCRONIZACIÓN UNIVERSAL SIN CORS
+      // SINCRONIZACIÓN UNIVERSAL SIN CORS Y CON PROTECCIÓN DE TIPOS
       fetchRemotePartners(showAlert) {
         const webhookUrl = this.state.store.sheetWebhook || OFFICIAL_WEBHOOK;
         const syncBtn = document.getElementById("btn-sync-cloud");
@@ -799,13 +807,13 @@
               if (!exists && cleanRemoteId) {
                 this.state.partners.unshift({
                   id: cleanRemoteId,
-                  name: remoteP.name || "Sin nombre",
+                  name: remoteP.name ? remoteP.name.toString() : "Sin nombre",
                   cuit: this.formatCuit(cleanRemoteCuit),
-                  phone: (remoteP.phone || "").toString().replace(/[^0-9]/g, ""),
-                  email: remoteP.email || "",
-                  zone: remoteP.zone || "No especificada",
-                  instagram: remoteP.instagram || "No especificado",
-                  date: remoteP.date || new Date().toISOString()
+                  phone: remoteP.phone ? remoteP.phone.toString().replace(/[^0-9]/g, "") : "",
+                  email: remoteP.email ? remoteP.email.toString() : "",
+                  zone: remoteP.zone ? remoteP.zone.toString() : "No especificada",
+                  instagram: remoteP.instagram ? remoteP.instagram.toString() : "No especificado",
+                  date: remoteP.date ? remoteP.date.toString() : new Date().toISOString()
                 });
                 added++;
               }
@@ -833,7 +841,7 @@
             syncBtn.disabled = false;
           }
           if (showAlert) {
-            alert("Error al conectar con Google Sheets.");
+            alert("Error de red al conectar con Google Sheets.");
           }
         };
 
@@ -861,7 +869,7 @@
           return;
         }
 
-        let cleanIg = data.instagram.trim();
+        let cleanIg = (data.instagram || "").toString().trim();
         if (cleanIg && !cleanIg.startsWith("@")) {
           cleanIg = "@" + cleanIg;
         }
@@ -1093,7 +1101,7 @@
               <td style="color: var(--warning); font-weight: 600;">$${Number(s.commissionAmount).toLocaleString("es-AR")}</td>
               <td>${statusBadge}</td>
               <td>${processedBtn}</td>
-              <td style="color: var(--text-muted); font-size: 0.78rem;">${s.date.replace("T", " ").substring(0, 16)}</td>
+              <td style="color: var(--text-muted); font-size: 0.78rem;">${this.formatDateSafe(s.date)}</td>
               <td>
                 <div style="display: flex; gap: 4px; align-items: center;">
                   <button class="btn btn-wa" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.sendWhatsAppToPartner('${s.operationNumber}')">💬 WhatsApp</button>
@@ -1127,8 +1135,8 @@
             `"${s.commissionAmount}"`,
             `"${s.status === 'delivered' ? 'Entregado' : (s.status === 'paid' ? 'Pagado' : 'Pendiente')}"`,
             `"${s.processed ? 'Procesado' : 'No Procesado'}"`,
-            `"${s.date.replace("T", " ").substring(0, 19)}"`,
-            `"${s.deliveryDate ? s.deliveryDate.replace("T", " ").substring(0, 19) : "-"}"`
+            `"${this.formatDateSafe(s.date)}"`,
+            `"${s.deliveryDate ? this.formatDateSafe(s.deliveryDate) : "-"}"`
           ];
           csv += row.join(";") + "\r\n";
         });
@@ -1141,31 +1149,32 @@
         const tbody = document.getElementById("table-partners-body");
         if (!tbody) return;
 
-        if (this.state.partners.length === 0) {
+        if (!this.state.partners || this.state.partners.length === 0) {
           tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 24px;">No hay partners registrados todavía. Hacé clic en "Actualizar / Traer Registros de la Nube" para sincronizar.</td></tr>`;
           return;
         }
 
         tbody.innerHTML = this.state.partners.map(p => {
-          const igClean = p.instagram ? p.instagram.replace("@", "") : "";
-          const igLink = (p.instagram && p.instagram !== "No especificado") 
-            ? `<a href="https://instagram.com/${igClean}" target="_blank" style="color: var(--accent); text-decoration: none;">${this.escapeHtml(p.instagram)}</a>` 
+          const igVal = (p.instagram || "").toString().trim();
+          const igClean = igVal.replace("@", "");
+          const igLink = (igVal && igVal !== "No especificado" && igClean !== "") 
+            ? `<a href="https://instagram.com/${igClean}" target="_blank" style="color: var(--accent); text-decoration: none;">${this.escapeHtml(igVal)}</a>` 
             : `<span style="color: var(--text-muted);">-</span>`;
 
           return `
             <tr>
-              <td><span class="code-chip">${this.escapeHtml(p.id)}</span></td>
-              <td><strong>${this.escapeHtml(p.name)}</strong></td>
+              <td><span class="code-chip">${this.escapeHtml(p.id || "")}</span></td>
+              <td><strong>${this.escapeHtml(p.name || "")}</strong></td>
               <td style="font-family: monospace; color: #cbd5e1;">${this.escapeHtml(p.cuit || "-")}</td>
               <td>
-                <a href="https://wa.me/${p.phone}" target="_blank" style="color: var(--accent); text-decoration: none;">
-                  +${this.escapeHtml(p.phone)}
+                <a href="https://wa.me/${p.phone || ""}" target="_blank" style="color: var(--accent); text-decoration: none;">
+                  +${this.escapeHtml(p.phone || "")}
                 </a>
               </td>
-              <td>${this.escapeHtml(p.email)}</td>
+              <td>${this.escapeHtml(p.email || "")}</td>
               <td>${this.escapeHtml(p.zone || "-")}</td>
               <td>${igLink}</td>
-              <td style="color: var(--text-muted); font-size: 0.8rem;">${p.date.split("T")[0]}</td>
+              <td style="color: var(--text-muted); font-size: 0.8rem;">${this.formatDateSafe(p.date)}</td>
               <td>
                 <div style="display: flex; gap: 6px;">
                   <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.75rem;" onclick="app.exportSingleVCard('${p.id}')">VCF</button>
@@ -1203,7 +1212,7 @@
             `"${(p.email || "").replace(/"/g, '""')}"`,
             `"${(p.zone || "").replace(/"/g, '""')}"`,
             `"${(p.instagram || "").replace(/"/g, '""')}"`,
-            `"${(p.date ? p.date.replace("T", " ").substring(0, 19) : "")}"`
+            `"${this.formatDateSafe(p.date)}"`
           ];
           csvContent += row.join(";") + "\r\n";
         });
@@ -1274,7 +1283,7 @@
           `N:${p.name};;;;`,
           `TEL;TYPE=CELL:+${p.phone}`,
           `EMAIL;TYPE=INTERNET:${p.email}`,
-          `NOTE:CUIT/CUIL: ${p.cuit || "N/A"} | Código: ${p.id} | Zona: ${p.zone} | Instagram: ${p.instagram || "N/A"} | Alta: ${p.date.split("T")[0]}`,
+          `NOTE:CUIT/CUIL: ${p.cuit || "N/A"} | Código: ${p.id} | Zona: ${p.zone} | Instagram: ${p.instagram || "N/A"} | Alta: ${this.formatDateSafe(p.date)}`,
           "END:VCARD"
         ].join("\r\n");
       },
@@ -1302,7 +1311,7 @@
           alert("No hay correos registrados.");
           return;
         }
-        const emails = this.state.partners.map(p => p.email).join(", ");
+        const emails = this.state.partners.map(p => p.email).filter(Boolean).join(", ");
         navigator.clipboard.writeText(emails).then(() => {
           alert("Emails copiados al portapapeles con éxito.");
         }).catch(() => {
@@ -1332,7 +1341,7 @@
 
       escapeHtml(str) {
         if (!str) return "";
-        return str.replace(/[&<>"']/g, m => ({
+        return str.toString().replace(/[&<>"']/g, m => ({
           "&": "&amp;",
           "<": "&lt;",
           ">": "&gt;",
