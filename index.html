@@ -10,14 +10,13 @@
   <meta name="googlebot" content="noindex, nofollow, nosnippet">
   <meta name="bingbot" content="noindex, nofollow">
 
-  <!-- Fuente Bodoni de alta definición (Carga gratuita) -->
+  <!-- Fuente Bodoni de alta definición -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      /* Identidad Visual Definitiva: Dark Mode Tecnológico / Neón Esmeralda */
       --bg-ambient-light: #2b394e;
       --bg-ambient-mid: #1a2536;
       --bg-ambient-base: #090e17;
@@ -242,7 +241,7 @@
       <div id="nav-actions"></div>
     </div>
 
-    <!-- VISTA 1: REGISTRO PARTNER (PÚBLICA) -->
+    <!-- VISTA 1: REGISTRO PARTNER -->
     <div id="view-partner" class="card">
       <h2 id="partner-form-title">Sumate como Partner Oficial</h2>
       
@@ -250,7 +249,7 @@
         <svg class="app-logo" width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="40" height="40" rx="8" fill="#0d1524" stroke="#10b981" stroke-width="1.5"/>
           <path d="M20 7L31 15V27L20 34L9 27V15L20 7Z" stroke="#10b981" stroke-width="2" stroke-linejoin="round"/>
-          <circle cx="20" cy="20.5" r="4.5" fill="#10b981"/>
+          <circle cx="20" cy="20.5" r="4" fill="#10b981"/>
         </svg>
         <p id="partner-form-desc">
           Completa tus Datos de contacto para Obtener una ingreso extra sin esfuerzo,para ello entra a nuestro canal Exclusivo de <span class="brand-bodoni" style="font-size: 1.05rem;">PARNER INF</span> de WhatsApp despues que te registras
@@ -307,7 +306,7 @@
       </form>
     </div>
 
-    <!-- VISTA 2: PANTALLA DE FELICITACIONES CON RECUADRO DESTACADO -->
+    <!-- VISTA 2: PANTALLA DE FELICITACIONES -->
     <div id="view-success" class="card hidden">
       <div class="success-hero">
         <div class="congrats-badge-header">✦ ¡Registro Exitoso y Confirmado! ✦</div>
@@ -440,10 +439,6 @@
 
         <div style="background-color: var(--bg-card-inner); border: 1px solid var(--border-card); border-radius: 10px; padding: 20px; margin-bottom: 20px;">
           <h3>Cargar Pedido por Código de Cupón (3L-3N)</h3>
-          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px;">
-            Al ingresar el código del cupón del partner (ej. <code>ABC-123</code>), el sistema genera el número correlativo de operación, asocia al titular y te permite controlar el pago y marcar la entrega.
-          </p>
-
           <form id="form-register-sale">
             <div class="form-row">
               <div class="form-group">
@@ -534,13 +529,9 @@
         </div>
       </div>
 
-      <!-- Solapa 4: Configuración Multi-Tienda -->
+      <!-- Solapa 4: Configuración -->
       <div id="tab-config" class="hidden">
         <h3>Adaptación del Sistema & Webhooks</h3>
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px;">
-          Configuración flexible para clonar o reutilizar el sistema en cualquier otro proyecto.
-        </p>
-
         <form id="form-store-settings">
           <div class="form-group">
             <label for="cfg-store-name">Nombre de la Aplicación / Tienda</label>
@@ -551,11 +542,11 @@
             <input type="text" id="cfg-store-sub">
           </div>
           <div class="form-group">
-            <label for="cfg-wa-link">Enlace Oficial de WhatsApp (Canal o Directo)</label>
+            <label for="cfg-wa-link">Enlace Oficial de WhatsApp</label>
             <input type="url" id="cfg-wa-link">
           </div>
           <div class="form-group">
-            <label for="cfg-sheet-url">URL de Apps Script (Google Sheets Webhook + Base de Datos Central)</label>
+            <label for="cfg-sheet-url">URL de Apps Script (Google Sheets Webhook)</label>
             <input type="url" id="cfg-sheet-url">
           </div>
           <div class="form-group">
@@ -576,22 +567,21 @@
 
   <script>
     /**
-     * PARNER INF - NÚCLEO JS MAESTRO
-     * Llave Maestra Fija Directa: fbd / 120182
-     * Entorno Oficial: https://partnerif.netlify.app/
+     * CREDENCIALES MAESTRAS Y WEBHOOK OFICIAL
      */
     const MASTER_AUTH = {
       user: "fbd",
       pass: "120182"
     };
 
-    // URL VINCULADA DE GOOGLE APPS SCRIPT
+    const OFFICIAL_WEBHOOK = "https://script.google.com/macros/s/AKfycbyi8woaM7dVZfHKHw9VCw6bpLa5pZlPHuwCPirJRUpkCZ8Ue1H5OmMfmIyt2y9MpaP8sA/exec";
+
     const DEFAULT_STORE_CONFIG = {
       storeName: "PARNER INF",
       storeSubtitle: "Gestión y Registro Oficial de Red",
       formTitle: "Sumate como Partner Oficial",
       whatsappUrl: "https://whatsapp.com/channel/0029VbE15jVJJhzRswWWVr3q",
-      sheetWebhook: "https://script.google.com/macros/s/AKfycbzSObB8fZVfv1m3idKKPqwOHMLxJ7rjGJ6USe2iqffbfKvSe6bRf7xBlaNiteCafxoI/exec",
+      sheetWebhook: OFFICIAL_WEBHOOK,
       vcardPrefix: "Partner"
     };
 
@@ -607,12 +597,15 @@
 
       init() {
         this.loadStorage();
+        // Garantiza siempre el webhook oficial activo
+        if (!this.state.store.sheetWebhook || this.state.store.sheetWebhook !== OFFICIAL_WEBHOOK) {
+          this.state.store.sheetWebhook = OFFICIAL_WEBHOOK;
+          this.saveStorage();
+        }
         this.applyStoreConfig();
         this.bindEvents();
         this.renderNav();
-        if (this.state.store.sheetWebhook) {
-          this.fetchRemotePartners(false);
-        }
+        this.fetchRemotePartners(false);
       },
 
       loadStorage() {
@@ -628,9 +621,6 @@
         const storedConfig = localStorage.getItem("pi_store_config");
         if (storedConfig) {
           this.state.store = Object.assign({}, DEFAULT_STORE_CONFIG, JSON.parse(storedConfig));
-          if (!this.state.store.sheetWebhook) {
-            this.state.store.sheetWebhook = DEFAULT_STORE_CONFIG.sheetWebhook;
-          }
         }
       },
 
@@ -766,10 +756,7 @@
         this.renderPartnersTable();
         this.renderSalesTable();
         this.renderAdminsTable();
-        
-        if (this.state.store.sheetWebhook) {
-          this.fetchRemotePartners(false);
-        }
+        this.fetchRemotePartners(false);
       },
 
       logout() {
@@ -777,45 +764,46 @@
         this.showView("view-partner");
       },
 
-      // ========================================================
-      // SINCRONIZACIÓN CON SEGUIMIENTO DE REDIRECCIÓN (CORS / HTTP 302)
-      // ========================================================
-      async fetchRemotePartners(showAlert) {
-        if (!this.state.store.sheetWebhook) {
-          if (showAlert) alert("Primero debés configurar la URL de tu Google Apps Script en 'Parámetros del Sistema'.");
-          return;
-        }
-
+      // SINCRONIZACIÓN BLINDADA POR JSONP
+      fetchRemotePartners(showAlert) {
+        const webhookUrl = this.state.store.sheetWebhook || OFFICIAL_WEBHOOK;
         const syncBtn = document.getElementById("btn-sync-cloud");
         if (syncBtn && showAlert) {
           syncBtn.textContent = "⏳ Conectando...";
           syncBtn.disabled = true;
         }
 
-        try {
-          const res = await fetch(this.state.store.sheetWebhook, {
-            method: "GET",
-            redirect: "follow",
-            headers: { "Accept": "application/json" }
-          });
-
-          if (!res.ok) {
-            throw new Error(`HTTP Error: ${res.status}`);
+        const callbackName = "cb_sync_" + Math.random().toString(36).substring(2, 9);
+        
+        const timeoutId = setTimeout(() => {
+          if (window[callbackName]) {
+            delete window[callbackName];
+            const oldScript = document.getElementById(callbackName);
+            if (oldScript) oldScript.remove();
+            if (syncBtn && showAlert) {
+              syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
+              syncBtn.disabled = false;
+            }
+            if (showAlert) alert("Tiempo de espera agotado. Verificá que la implementación en Apps Script tenga acceso asignado a 'Cualquiera'.");
           }
+        }, 12000);
 
-          const rawText = await res.text();
-          let data;
-          try {
-            data = JSON.parse(rawText);
-          } catch(e) {
-            throw new Error("Respuesta no válida de Google Sheets");
+        window[callbackName] = (data) => {
+          clearTimeout(timeoutId);
+          delete window[callbackName];
+          const oldScript = document.getElementById(callbackName);
+          if (oldScript) oldScript.remove();
+
+          if (syncBtn && showAlert) {
+            syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
+            syncBtn.disabled = false;
           }
 
           if (data && data.partners && Array.isArray(data.partners)) {
             let addedCount = 0;
             data.partners.forEach(remoteP => {
               const alreadyExists = this.state.partners.some(
-                p => p.id === remoteP.id || this.cleanCuit(p.cuit) === this.cleanCuit(remoteP.cuit)
+                p => p.id === remoteP.id || (p.cuit && remoteP.cuit && this.cleanCuit(p.cuit) === this.cleanCuit(remoteP.cuit))
               );
               if (!alreadyExists && remoteP.id) {
                 this.state.partners.push({
@@ -835,31 +823,41 @@
             this.saveStorage();
             this.renderPartnersTable();
             if (showAlert) {
-              alert(`Sincronización completada. Se incorporaron ${addedCount} nuevos registros.`);
+              alert(`¡Sincronización exitosa! Se incorporaron ${addedCount} nuevos registros.`);
             }
           } else {
-            if (showAlert) alert("Conexión exitosa. No hay registros pendientes para importar.");
+            if (showAlert) alert("Conectado con éxito a Google Sheets. No hay filas pendientes para importar.");
           }
-        } catch (err) {
-          console.error("Error sincronizando:", err);
-          if (showAlert) {
-            alert("Error al conectar con Google Sheets. Verificá que la implementación en Apps Script tenga acceso asignado a 'Cualquiera'.");
-          }
-        } finally {
+        };
+
+        const script = document.createElement("script");
+        script.id = callbackName;
+        const separator = webhookUrl.includes("?") ? "&" : "?";
+        script.src = `${webhookUrl}${separator}callback=${callbackName}`;
+        
+        script.onerror = () => {
+          clearTimeout(timeoutId);
+          delete window[callbackName];
+          script.remove();
           if (syncBtn && showAlert) {
             syncBtn.textContent = "🔄 Actualizar / Traer Registros de la Nube";
             syncBtn.disabled = false;
           }
-        }
+          if (showAlert) {
+            alert("No se pudo conectar con Google Sheets. Verificá que en Apps Script la implementación tenga acceso asignado a 'Cualquiera'.");
+          }
+        };
+
+        document.body.appendChild(script);
       },
 
+      // REGISTRO Y ENVÍO SEGURO
       async registerPartner(data) {
         const errorAlert = document.getElementById("register-error-alert");
         errorAlert.style.display = "none";
         errorAlert.textContent = "";
 
         if (data.hp && data.hp.trim() !== "") {
-          console.warn("Intento de bot neutralizado silenciosamente.");
           return;
         }
 
@@ -873,7 +871,7 @@
 
         const exists = this.state.partners.some(p => this.cleanCuit(p.cuit) === cleanCuitNum);
         if (exists) {
-          errorAlert.textContent = "⚠️ Este CUIT/CUIL ya se encuentra registrado en el sistema. Solo se permite un registro de Partner por CUIT/CUIL.";
+          errorAlert.textContent = "⚠️️ Este CUIT/CUIL ya se encuentra registrado en el sistema.";
           errorAlert.style.display = "block";
           return;
         }
@@ -900,22 +898,26 @@
         this.state.lastRegisteredCode = newPartner.id;
         this.saveStorage();
 
-        // Enviar a Google Sheets
-        if (this.state.store.sheetWebhook) {
-          try {
-            fetch(this.state.store.sheetWebhook, {
-              method: "POST",
-              mode: "no-cors",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                action: "new_partner",
-                store: this.state.store.storeName,
-                ...newPartner
-              })
-            });
-          } catch(err) {
-            console.error("Error al enviar a Google Sheets:", err);
-          }
+        // Envío directo compatible con formulario URL-Encoded a Google Sheets
+        const webhookUrl = this.state.store.sheetWebhook || OFFICIAL_WEBHOOK;
+        try {
+          fetch(webhookUrl, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({
+              store: this.state.store.storeName,
+              id: newPartner.id,
+              name: newPartner.name,
+              cuit: newPartner.cuit,
+              phone: newPartner.phone,
+              email: newPartner.email,
+              zone: newPartner.zone,
+              instagram: newPartner.instagram
+            }).toString()
+          });
+        } catch(err) {
+          console.error("Error al enviar a la hoja:", err);
         }
 
         this.displaySuccessView(newPartner);
@@ -1003,10 +1005,6 @@
 
         this.saveStorage();
         this.renderSalesTable();
-
-        if (newStatus === "delivered") {
-          this.notifyPartnerDelivered(sale);
-        }
       },
 
       sendWhatsAppToPartner(opNum) {
@@ -1020,7 +1018,7 @@
         }
 
         if (!phone) {
-          alert(`No hay número de WhatsApp registrado para el partner de la operación ${sale.operationNumber}.`);
+          alert(`No hay WhatsApp registrado para la operación ${sale.operationNumber}.`);
           return;
         }
 
@@ -1041,53 +1039,6 @@
         );
 
         window.open(`https://wa.me/${cleanPhone}?text=${text}`, "_blank");
-      },
-
-      notifyPartnerDelivered(sale) {
-        if (!sale.partnerEmail || sale.partnerEmail === "Sin email registrado") {
-          alert(`El pedido ${sale.operationNumber} fue marcado como ENTREGADO, pero el partner no tiene un correo válido asociado.`);
-          return;
-        }
-
-        if (this.state.store.sheetWebhook) {
-          fetch(this.state.store.sheetWebhook, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              action: "notify_delivery_email",
-              store: this.state.store.storeName,
-              recipient: sale.partnerEmail,
-              partnerName: sale.partnerName,
-              operationNumber: sale.operationNumber,
-              amount: sale.amount,
-              commission: sale.commissionAmount
-            })
-          }).catch(err => console.error("Error enviando email vía Sheets:", err));
-        }
-
-        const subject = encodeURIComponent(`¡Pedido Entregado! Comisión generada en ${this.state.store.storeName}`);
-        const body = encodeURIComponent(
-          `Hola ${sale.partnerName},\n\n` +
-          `Te informamos que el pedido asociado a tu cupón (${sale.couponCode}) ya fue ENTREGADO con éxito.\n\n` +
-          `Detalle de la Operación:\n` +
-          `- Número de Operación: ${sale.operationNumber}\n` +
-          `- Monto de la Venta: $${sale.amount.toLocaleString("es-AR")}\n` +
-          `- Tu Comisión Ganada: $${sale.commissionAmount.toLocaleString("es-AR")}\n\n` +
-          `¡Gracias por formar parte de nuestra red oficial!\n` +
-          `${this.state.store.storeName}`
-        );
-
-        const mailtoUrl = `mailto:${sale.partnerEmail}?subject=${subject}&body=${body}`;
-
-        const proceed = confirm(
-          `✅ Operación ${sale.operationNumber} marcada como ENTREGADA.\n\n` +
-          `¿Deseás abrir la notificación por correo para ${sale.partnerName} (${sale.partnerEmail})?`
-        );
-
-        if (proceed) {
-          window.location.href = mailtoUrl;
-        }
       },
 
       deleteSale(opNum) {
@@ -1140,9 +1091,6 @@
             `;
           } else if (s.status === "delivered") {
             statusBadge = `<span class="status-badge status-delivered">Entregado</span>`;
-            paymentActionBtn = `
-              <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.notifyPartnerDelivered(app.state.sales.find(x => x.operationNumber === '${s.operationNumber}'))">📧 Mail</button>
-            `;
           }
 
           const processedBtn = s.processed
@@ -1163,10 +1111,8 @@
               <td>${processedBtn}</td>
               <td style="color: var(--text-muted); font-size: 0.78rem;">${s.date.replace("T", " ").substring(0, 16)}</td>
               <td>
-                <div style="display: flex; gap: 4px; align-items: center; flex-wrap: nowrap;">
-                  <button class="btn btn-wa" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.sendWhatsAppToPartner('${s.operationNumber}')" title="Enviar WhatsApp al Partner">
-                    💬 WhatsApp
-                  </button>
+                <div style="display: flex; gap: 4px; align-items: center;">
+                  <button class="btn btn-wa" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.sendWhatsAppToPartner('${s.operationNumber}')">💬 WhatsApp</button>
                   ${paymentActionBtn}
                   <button class="btn btn-danger" style="padding: 4px 8px; font-size: 0.72rem;" onclick="app.deleteSale('${s.operationNumber}')">X</button>
                 </div>
@@ -1204,7 +1150,7 @@
         });
 
         const safeStoreName = this.state.store.storeName.replace(/\s+/g, "_");
-        this.downloadFile(`Pedidos_Entregas_${safeStoreName}_${new Date().toISOString().split("T")[0]}.csv`, csv, "text/csv;charset=utf-8;");
+        this.downloadFile(`Pedidos_${safeStoreName}_${new Date().toISOString().split("T")[0]}.csv`, csv, "text/csv;charset=utf-8;");
       },
 
       renderPartnersTable() {
@@ -1219,7 +1165,7 @@
         tbody.innerHTML = this.state.partners.map(p => {
           const igClean = p.instagram ? p.instagram.replace("@", "") : "";
           const igLink = (p.instagram && p.instagram !== "No especificado") 
-            ? `<a href="https://instagram.com/${igClean}" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 500;">${this.escapeHtml(p.instagram)}</a>` 
+            ? `<a href="https://instagram.com/${igClean}" target="_blank" style="color: var(--accent); text-decoration: none;">${this.escapeHtml(p.instagram)}</a>` 
             : `<span style="color: var(--text-muted);">-</span>`;
 
           return `
@@ -1228,7 +1174,7 @@
               <td><strong>${this.escapeHtml(p.name)}</strong></td>
               <td style="font-family: monospace; color: #cbd5e1;">${this.escapeHtml(p.cuit || "-")}</td>
               <td>
-                <a href="https://wa.me/${p.phone}" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 500;">
+                <a href="https://wa.me/${p.phone}" target="_blank" style="color: var(--accent); text-decoration: none;">
                   +${this.escapeHtml(p.phone)}
                 </a>
               </td>
