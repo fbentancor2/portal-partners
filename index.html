@@ -94,20 +94,96 @@
 
     .app-logo { display: inline-block; vertical-align: middle; flex-shrink: 0; }
 
-    .banner-desc {
-      display: flex; align-items: center; gap: 14px;
-      background: rgba(16, 185, 129, 0.06);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
+    /* Módulo Informativo / Explicación Partner */
+    .partner-info-box {
+      background: linear-gradient(180deg, rgba(17, 26, 46, 0.95) 0%, rgba(8, 14, 24, 0.95) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      border-radius: 14px;
+      padding: 24px 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(16, 185, 129, 0.06);
+      position: relative;
+      overflow: hidden;
     }
-    .banner-desc p { color: #e2e8f0; font-size: 0.92rem; line-height: 1.5; margin: 0; }
+    .partner-info-box::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .partner-info-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 20px;
+    }
+    .partner-info-pill {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 9999px;
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .partner-info-title {
+      font-size: 1.35rem;
+      color: #ffffff;
+      margin-bottom: 8px;
+      border: none;
+      padding: 0;
+    }
+    .partner-info-text {
+      color: #cbd5e1;
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+    .partner-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .partner-step-card {
+      background-color: var(--bg-card-inner);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .partner-step-card:hover {
+      border-color: rgba(16, 185, 129, 0.45);
+      transform: translateY(-2px);
+    }
+    .step-number {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .step-title {
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .step-desc {
+      color: var(--text-muted);
+      font-size: 0.83rem;
+      line-height: 1.45;
+    }
 
     .form-group { margin-bottom: 18px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
     @media (max-width: 650px) {
       .form-row { grid-template-columns: 1fr; }
-      .banner-desc { flex-direction: column; align-items: flex-start; }
     }
 
     label { display: block; margin-bottom: 6px; color: #e2e8f0; font-size: 0.85rem; font-weight: 500; }
@@ -216,7 +292,7 @@
     .tab-btn:hover { color: var(--text-main); }
     .tab-btn.active { background-color: rgba(255, 255, 255, 0.09); color: var(--accent); }
 
-    /* Estilo de la Barra de Búsqueda de Partners */
+    /* Barra de Búsqueda de Partners */
     .search-bar-box {
       background-color: var(--bg-card-inner);
       border: 1px solid var(--border-card);
@@ -251,7 +327,7 @@
         </svg>
         <div>
           <h1 style="margin: 0;">
-            <span class="brand-bodoni" style="font-size: 1.85rem;">PARNER INF</span>
+            <span class="brand-bodoni" style="font-size: 1.85rem;" id="header-brand-name">PARNER INF</span>
           </h1>
           <p id="brand-header-subtitle" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 2px;">Gestión y Registro Oficial de Red</p>
         </div>
@@ -259,21 +335,43 @@
       <div id="nav-actions"></div>
     </div>
 
-    <!-- VISTA 1: REGISTRO PARTNER -->
+    <!-- VISTA 1: REGISTRO PARTNER + MÓDULO EXPLICATIVO -->
     <div id="view-partner" class="card">
-      <h2 id="partner-form-title">Sumate como Partner Oficial</h2>
       
-      <div class="banner-desc">
-        <svg class="app-logo" width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="40" height="40" rx="8" fill="#0d1524" stroke="#10b981" stroke-width="1.5"/>
-          <path d="M20 7L31 15V27L20 34L9 27V15L20 7Z" stroke="#10b981" stroke-width="2" stroke-linejoin="round"/>
-          <circle cx="20" cy="20.5" r="4" fill="#10b981"/>
-        </svg>
-        <p id="partner-form-desc">
-          Completa tus Datos de contacto para Obtener una ingreso extra sin esfuerzo,para ello entra a nuestro canal Exclusivo de <span class="brand-bodoni" style="font-size: 1.05rem;">PARNER INF</span> de WhatsApp despues que te registras
-        </p>
-      </div>
+      <!-- HERO EXPLICATIVO: ¿QUÉ ES SER PARTNER? -->
+      <section class="partner-info-box">
+        <div class="partner-info-header">
+          <span class="partner-info-pill" id="ui-info-badge">Oportunidad & Colaboración</span>
+          <h2 class="partner-info-title" id="ui-info-title">
+            ¿Qué significa ser parte del mundo <span class="brand-bodoni" style="font-size: 1.25rem;">PARNER INF</span>?
+          </h2>
+          <p class="partner-info-text" id="ui-info-body">
+            Ser Partner te ayuda a generar un ingreso extra sin complicaciones. Al registrarte en nuestro sistema, obtenés un código de cupón exclusivo (3 letras y 3 números) y acceso a nuestro canal privado con materiales digitales listos para compartir. Con tu código ofrecés descuentos a tus compradores y obtenés un porcentaje de cada venta que se concrete. Porque creemos que colaborando todos nos potenciamos: sumate hoy.
+          </p>
+        </div>
 
+        <div class="partner-steps-grid">
+          <div class="partner-step-card">
+            <span class="step-number">Paso 01</span>
+            <div class="step-title">Inscripción Inmediata</div>
+            <div class="step-desc">Completás el formulario y el sistema te genera automáticamente tu código único de 3 letras y 3 números.</div>
+          </div>
+          <div class="partner-step-card">
+            <span class="step-number">Paso 02</span>
+            <div class="step-title">Materiales & WhatsApp</div>
+            <div class="step-desc">Ingresás a nuestro canal exclusivo donde recibís fotos, videos y textos listos para compartir en tus redes.</div>
+          </div>
+          <div class="partner-step-card">
+            <span class="step-number">Paso 03</span>
+            <div class="step-title">Ganás en Cada Venta</div>
+            <div class="step-desc">Tu cliente obtiene un descuento especial y vos cobrás tu porcentaje de comisión por cada operación confirmada.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FORMULARIO DE ALTA -->
+      <h2 id="partner-form-title" style="margin-top: 10px;">Sumate como Partner Oficial</h2>
+      
       <div id="register-error-alert" class="error-alert"></div>
 
       <form id="form-partner-register">
@@ -319,7 +417,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary" id="btn-submit-register" style="width: 100%; margin-top: 8px;">
-          <span>Unirme a</span> <span class="brand-bodoni" style="font-size: 1.05rem; margin-left: 4px;">PARNER INF</span>
+          <span>Unirme ahora como</span> <span class="brand-bodoni" style="font-size: 1.05rem; margin-left: 4px;">PARNER INF</span>
         </button>
       </form>
     </div>
@@ -555,17 +653,25 @@
         </div>
       </div>
 
-      <!-- Solapa 4: Configuración -->
+      <!-- Solapa 4: Configuración Dinámica -->
       <div id="tab-config" class="hidden">
-        <h3>Adaptación del Sistema & Webhooks</h3>
+        <h3>Adaptación del Sistema, Marca & Textos</h3>
         <form id="form-store-settings">
           <div class="form-group">
             <label for="cfg-store-name">Nombre de la Aplicación / Tienda</label>
             <input type="text" id="cfg-store-name">
           </div>
           <div class="form-group">
-            <label for="cfg-store-sub">Bajada o Subtítulo</label>
+            <label for="cfg-store-sub">Bajada o Subtítulo del Encabezado</label>
             <input type="text" id="cfg-store-sub">
+          </div>
+          <div class="form-group">
+            <label for="cfg-info-title">Título Explicativo (¿Qué es ser Partner?)</label>
+            <input type="text" id="cfg-info-title">
+          </div>
+          <div class="form-group">
+            <label for="cfg-info-body">Texto Explicativo Principal</label>
+            <textarea id="cfg-info-body" rows="4"></textarea>
           </div>
           <div class="form-group">
             <label for="cfg-wa-link">Enlace Oficial de WhatsApp</label>
@@ -606,6 +712,8 @@
       storeName: "PARNER INF",
       storeSubtitle: "Gestión y Registro Oficial de Red",
       formTitle: "Sumate como Partner Oficial",
+      infoTitle: "¿Qué significa ser parte del mundo PARNER INF?",
+      infoBody: "Ser Partner te ayuda a generar un ingreso extra sin complicaciones. Al registrarte en nuestro sistema, obtenés un código de cupón exclusivo (3 letras y 3 números) y acceso a nuestro canal privado con materiales digitales listos para compartir. Con tu código ofrecés descuentos a tus compradores y obtenés un porcentaje de cada venta que se concrete. Porque creemos que colaborando todos nos potenciamos: sumate hoy.",
       whatsappUrl: "https://whatsapp.com/channel/0029VbE15jVJJhzRswWWVr3q",
       sheetWebhook: OFFICIAL_WEBHOOK,
       vcardPrefix: "Partner"
@@ -658,11 +766,25 @@
 
       applyStoreConfig() {
         document.getElementById("page-title").textContent = this.state.store.storeName;
+        document.getElementById("header-brand-name").textContent = this.state.store.storeName;
         document.getElementById("brand-header-subtitle").textContent = this.state.store.storeSubtitle;
         document.getElementById("partner-form-title").textContent = this.state.store.formTitle;
 
+        // Renderizado del módulo explicativo
+        const titleEl = document.getElementById("ui-info-title");
+        if (titleEl) {
+          titleEl.textContent = this.state.store.infoTitle || DEFAULT_STORE_CONFIG.infoTitle;
+        }
+        const bodyEl = document.getElementById("ui-info-body");
+        if (bodyEl) {
+          bodyEl.textContent = this.state.store.infoBody || DEFAULT_STORE_CONFIG.infoBody;
+        }
+
+        // Carga en campos de configuración del panel
         document.getElementById("cfg-store-name").value = this.state.store.storeName;
         document.getElementById("cfg-store-sub").value = this.state.store.storeSubtitle;
+        document.getElementById("cfg-info-title").value = this.state.store.infoTitle || DEFAULT_STORE_CONFIG.infoTitle;
+        document.getElementById("cfg-info-body").value = this.state.store.infoBody || DEFAULT_STORE_CONFIG.infoBody;
         document.getElementById("cfg-wa-link").value = this.state.store.whatsappUrl;
         document.getElementById("cfg-sheet-url").value = this.state.store.sheetWebhook;
         document.getElementById("cfg-vcard-prefix").value = this.state.store.vcardPrefix;
@@ -1465,6 +1587,8 @@
           e.preventDefault();
           this.state.store.storeName = document.getElementById("cfg-store-name").value.trim() || DEFAULT_STORE_CONFIG.storeName;
           this.state.store.storeSubtitle = document.getElementById("cfg-store-sub").value.trim() || DEFAULT_STORE_CONFIG.storeSubtitle;
+          this.state.store.infoTitle = document.getElementById("cfg-info-title").value.trim() || DEFAULT_STORE_CONFIG.infoTitle;
+          this.state.store.infoBody = document.getElementById("cfg-info-body").value.trim() || DEFAULT_STORE_CONFIG.infoBody;
           this.state.store.whatsappUrl = document.getElementById("cfg-wa-link").value.trim() || DEFAULT_STORE_CONFIG.whatsappUrl;
           this.state.store.sheetWebhook = document.getElementById("cfg-sheet-url").value.trim() || DEFAULT_STORE_CONFIG.sheetWebhook;
           this.state.store.vcardPrefix = document.getElementById("cfg-vcard-prefix").value.trim() || "Partner";
